@@ -1,28 +1,67 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import * as React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Container, AppBar, Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography, Button } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { BiChevronDown, BiChevronUp } from "react-icons/bi";
-import Dropdown from "./Dropdown"
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import MenuIcon from "@mui/icons-material/Menu";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
-const drawerWidth = 160;
+import logo from "../assets/images/logo.png";
+import "../assets/styles/Navbar.css";
+
+import { Dropdown } from "."
+
+
+const drawerWidth = 240;
 const navItems = ["Home", "About us", "Resources", "Pricing"];
 
-const Navbar = (props) => {
-  const { window, currentPage } = props;
+export const Navbar = ({ currentPage, window }) => {
   const navigate = useNavigate();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [resourcesShow, setResourcesShow] = React.useState(false);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [show, setShow] = React.useState(true);
+  const [lastScrollY, setLastScrollY] = React.useState(0);
+
+  React.useEffect(() => {
+    const controlNavbar = () => {
+      if (typeof window !== 'undefined') {
+        if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
+          setShow(false);
+        } else { // if scroll up show the navbar
+          setShow(true);
+        }
+
+        // remember current page location to use in the next move
+        setLastScrollY(window.scrollY);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar);
+
+      // cleanup function
+      return () => {
+        window.removeEventListener('scroll', controlNavbar);
+      };
+    }
+  }, [lastScrollY]);
 
   const changeLocation = React.useCallback((callerID) => {
     navigate(`/${callerID}`);
   }, [navigate]);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
 
   const changeColor = (ref) => {
     if (ref.getAttribute("id") === currentPage) {
@@ -51,55 +90,17 @@ const Navbar = (props) => {
   };
 
   const drawer = (
-    <Box sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2, color: "black", fontWeight: 700, marginTop: "30px" }}
-        onClick={handleDrawerToggle}
-      >
-        Enablemint
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        enablemint
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            { item === "Resources" ?
-            <Box display="flex" flexDirection="column" justifyContent="start" sx={{width: "100%"}}>
-              <ListItemButton sx={{ textAlign: "left" }} onClick={()=>setResourcesShow(!resourcesShow)}>
-                <ListItemText primary="Resources" />
-                { resourcesShow === true ? <BiChevronUp /> : <BiChevronDown /> }
-              </ListItemButton>
-              {
-                resourcesShow && 
-                <Box display="flex" flexDirection="column" 
-                  sx={{marginTop: "-10px"}}
-                >
-                  <Button 
-                    sx={{
-                      marginLeft: "-30px",
-                      color: "#373737",
-                      fontSize: "13px",
-                      fontWeight: 500,
-                      marginBottom: "-13px",
-                    }}
-                    onClick={()=>navigate("/help-center")}
-                  >
-                    Help Center
-                  </Button>
-                  <Button 
-                    sx={{
-                      marginLeft: "-30px",
-                      color: "#373737",
-                      fontSize: "13px",
-                      fontWeight: 500,
-                    }}
-                    onClick={()=>navigate("/contact-us")}
-                  >
-                    Contact Us
-                  </Button>
-                </Box>
-              }
-            </Box>
-            : 
-              <ListItemButton sx={{ textAlign: "left" }}>
+            if (item === "Resources") {<Dropdown />}else
+            {
+              <ListItemButton sx={{ textAlign: "center" }}>
                 <ListItemText primary={item} />
               </ListItemButton>
             }
@@ -112,98 +113,92 @@ const Navbar = (props) => {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex', padding: "0 50px" }}>
-      <AppBar component="nav"
-        sx={{
-          background: "#161C28",
-        }}
-      >
-        <Container sx={{padding: "10px !important"}}>
-          <Toolbar sx={{
-              padding: "0px !important",
-              ['@media (max-width:600px)']: { // eslint-disable-line no-useless-computed-key 
-                display: "flex",
-                justifyContent: "space-between"
-              }
-            }}
-          >
+    <>
+      {/* className={`active ${show && 'hidden'}`} */}
+      <Box sx={{ zIndex: 7898 }}>
+        <AppBar
+          component="nav"
+          sx={{ height: 110, display: "flex", bgcolor: "#161C28" }}
+          style={{ "justifyContent": "center" }}
+        >
+          <Toolbar>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
+              sx={{ mr: 2, display: { sm: "none" } }}
             >
               <MenuIcon />
             </IconButton>
+            <Link to="/">
+              <Box
+                component="img"
+                sx={{ height: 78, width: 78, ml: 17 }}
+                alt="EnableMint Logo"
+                src={logo}
+              />
+            </Link>
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-              onClick={()=>navigate("/")}
-            >
-              <img src="/assets/logo-1@2x.png" alt='logo' style={{width: "55px", marginRight: "5px",}} />
-              enablemint
-            </Typography>
-            <Box sx={{ 
-                display: { xs: 'none', sm: 'block' }, 
-                marginRight: "120px", 
-                ['@media (max-width:680px)']: { // eslint-disable-line no-useless-computed-key 
-                  marginRight: "0px", 
-                }
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", sm: "block" },
+                fontSize: 24,
               }}
             >
+              <Link to="/">enablemint</Link>
+            </Typography>
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navItems.map((item) => getNavItem(item))}
             </Box>
-            <Box>
-              <Button sx={{ color: '#fff' }}
-                onClick={()=>navigate("/login")}
+            <Box
+              sx={{ mr: 5, ml: 5, display: { xs: "none", sm: "block" } }}
+            ></Box>
+            <Box sx={{ display: "flex" }} style={{ "justifyContent": "center" }}>
+              <Button
+                sx={{ color: "#fff", mr: 1, ":hover": { color: "#388E3C", bgcolor: "#19d27014" } }}
+                onClick={() => { changeLocation('login') }}
               >
                 Login
               </Button>
               <Button
                 sx={{
-                  width: "80px",
-                  height: "40px",
-                  background: "#388E3C",
-                  borderRadius: "10px",
-                  fontFamily: 'Inter',
-                  fontStyle: "normal",
-                  fontWeight: "500",
-                  fontSize: "16px",
-                  lineHeight: "19px",
-                  color: '#F8F8FA',
+                  mr: 16.3,
+                  borderRadius: 1,
+                  color: "#fff",
+                  bgcolor: "#388E3C",
+                  ":hover": { bgcolor: "#1E5620" },
                 }}
-                onClick={()=>navigate("/signup")}
+                onClick={() => { changeLocation('signup') }}
               >
                 Sign Up
               </Button>
             </Box>
           </Toolbar>
-        </Container>
-      </AppBar>
-      <Box component="nav">
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer>
+        </AppBar>
+        <Box component="nav">
+          <Drawer
+            container={container}
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: "block", sm: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Box>
       </Box>
-    </Box>
+    </>
   );
-}
-
-Navbar.propTypes = {
-  window: PropTypes.func,
 };
-
-export default Navbar;
