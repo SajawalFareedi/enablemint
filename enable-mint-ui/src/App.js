@@ -15,7 +15,6 @@ export const App = ({ root }) => {
       <Route path="/reset-password" element={<Pages.ForgetPassword />} />
       <Route path="/signup" element={<SignUpFlowHandler /> } />
       <Route path="/help-center" element={<Pages.HelpCenter />} />
-
       <Route path="/contact-us" element={<Pages.ContactUs />} />
 
       <Route path="/dashboard" element={<Pages.Dashboard />} />
