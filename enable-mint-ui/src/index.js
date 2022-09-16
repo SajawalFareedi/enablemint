@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import { CssBaseline, ThemeProvider, createTheme, StyledEngineProvider } from "@mui/material";
 import reportWebVitals from "./reportWebVitals";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const createFontFamily = (fontFamily) => {
   return {
     h1: { fontFamily },

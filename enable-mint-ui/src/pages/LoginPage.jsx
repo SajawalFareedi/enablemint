@@ -1,4 +1,5 @@
-import * as React from "react"
+import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { TextField, InputAdornment, Icon, IconButton } from "@mui/material";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -6,7 +7,8 @@ import "../assets/styles/Login.css";
 
 
 export const LoginPage = () => {
-    const validationSchema = yup.object({
+    const navigate = useNavigate()
+;    const validationSchema = yup.object({
         email: yup
             .string('Enter your email')
             .email('Enter a valid email')
@@ -26,6 +28,7 @@ export const LoginPage = () => {
             console.log(values);
             formik.isSubmitting = true;
             setInterval(resetForm, 3000);
+            navigate("/dashboard")
         },
     });
 
