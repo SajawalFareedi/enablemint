@@ -1,8 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import StarIcon from '@mui/icons-material/Star';
 import { palette } from '../themes/DefaultTheme';
-// import StarBorderIcon from '@mui/icons-material/StarBorder';
-// import StarHalfIcon from '@mui/icons-material/StarHalf';
 
 export const StarFeedback = ({ rate, text }) => {
     return (

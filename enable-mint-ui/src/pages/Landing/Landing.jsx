@@ -1,8 +1,5 @@
 import { Box, Typography, Grid, Button } from '@mui/material'
 
-import Separator from '../../assets/images/curve-separator.png'
-import LandingImage from '../../assets/images/landing-bg.png'
-
 export const Landing = () => {
     return (
         <Box mt={{ md: 10, xs: 0 }} sx={{
@@ -27,13 +24,17 @@ export const Landing = () => {
                                 },
                             }}
                         >
-                            <img src={Separator} alt='' />
+                            <img src="/assets/vector-32.svg" alt='' />
                         </Box>
                         <Typography variant="h6" sx={{ fontWeight: 500 }}>
                             More qualified B2B leads,<br /> less wasted cost & efforts
                         </Typography>
                         <Box>
-                            <Button variant="contained">Get Started for Free</Button>
+                            <Button variant="contained" sx={{
+                                '&:hover': {
+                                    background: "#377d3a",
+                                }
+                            }}>Get Started for Free</Button>
                         </Box>
                     </Box>
                 </Grid>
@@ -43,7 +44,7 @@ export const Landing = () => {
                             padding: "20px 0 !important",
                         },
                     }}>
-                        <img src={LandingImage} alt='' width="100%" height="100%" />
+                        <img src="/assets/asset-1-1@2x.png" alt='' width="100%" height="100%" />
                     </Box>
                 </Grid>
             </Grid>

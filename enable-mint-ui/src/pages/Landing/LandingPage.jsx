@@ -38,6 +38,8 @@ export const LandingPage = () => {
         <Navbar currentPage="home" />
         <Box mt={14}>
           <Section sx={{
+            backgroundImage: `url(/assets/ellipse-38.svg)`,
+            backgroundSize: "cover",
             ['@media (max-width:500px)']: { // eslint-disable-line no-useless-computed-key
               paddingLeft: "20px !important",
               paddingRight: "20px !important",
@@ -99,7 +101,7 @@ export const LandingPage = () => {
                   <Box display="flex" justifyContent={{ md: 'center', xs: 'start' }}>
                     <Button variant="secondary" sx={{
                       '&:hover': {
-                        background: "#57b95b"
+                        background: "#377d3a",
                       }
                     }}>Get Started for Free</Button>
                   </Box>

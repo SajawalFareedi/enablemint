@@ -68,21 +68,21 @@ export const Features = () => {
                     <Box height="100%" display="flex" flexDirection="column" justifyContent="space-between" pt={{ md: 0, xs: 5 }}>
                         <Box mb={5}>
                             <Feature
-                                icon={Graph}
+                                icon="/assets/activity-1.svg"
                                 title="Automate your lead generation"
                                 body="A single input - unlimited companies & contacts. Hands-off approach with scheduled daily launches"
                             />
                         </Box>
                         <Box mb={5}>
                             <Feature
-                                icon={PieChart}
+                                icon="/assets/piechart-1.svg"
                                 title="Customized lead generation"
                                 body="	Curate leads specifically for your niche generated in real time "
                             />
                         </Box>
                         <Box mb={5}>
                             <Feature
-                                icon={Command}
+                                icon="assets/command-1.svg"
                                 title="No-Code solution anyone can use"
                                 body="Prebuilt workflows with a single input build to save you hours on identifying quality leads"
                             />

@@ -1,5 +1,4 @@
-import { Box, Grid, Typography, IconButton } from '@mui/material'
-import Team from '../../assets/images/team.png'
+import { Box, Grid, Typography, IconButton } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { palette } from '../../themes/DefaultTheme';
 
@@ -58,7 +57,7 @@ export const Customers = () => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Box>
-                        <img src={Team} alt="" width="100%" />
+                        <img src="/assets/png-1@2x.png" alt="" width="100%" />
                     </Box>
                 </Grid>
             </Grid>

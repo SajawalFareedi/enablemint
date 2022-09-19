@@ -147,19 +147,17 @@ const createComponentSystem = () => ({
                     background: theme.palette.primary.main,
                     borderRadius: 70,
                     padding: 20,
-                    // px: 5,
                 })
             },
-						{
-							props: { variant: 'secondary' },
-							style: ({ theme }) => ({
-									background: theme.palette.primary.main,
-									borderRadius: 10,
-									color: theme.palette.common.white,
-									padding: 20,
-									// px: 5,
-							})
-					}
+                {
+                    props: { variant: 'secondary' },
+                    style: ({ theme }) => ({
+                            background: theme.palette.primary.main,
+                            borderRadius: 10,
+                            color: theme.palette.common.white,
+                            padding: 20,
+                    })
+                }
         ]
     },
 		MuiTypography: {
