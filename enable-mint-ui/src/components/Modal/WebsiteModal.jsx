@@ -1,10 +1,26 @@
 import * as React from 'react';
-import { Backdrop, Box, Button, Modal, Fade, Typography } from '@mui/material';
+import { Backdrop, Box, Button, Modal, Fade, Typography, FormHelperText, MenuItem, FormControl, Select } from '@mui/material';
 import { BiChevronLeft } from "react-icons/bi";
+
+import InputLabel from '@mui/material/InputLabel';
 
 import { styled } from '@mui/system';
 
 const InputField = styled('input')({
+  width: "100%",
+  padding: "15px 20px",
+  background: "#FFFFFF",
+  border: "1px solid #388E3C",
+  borderRadius: "32px",
+  fontFamily: 'Inter',
+  fontStyle: "normal",
+  fontWeight: 400,
+  fontSize: "16px",
+  lineHeight: "19px",
+  color: "#A6A6A6",
+});
+
+const SelectField = styled('select')({
   width: "100%",
   padding: "15px 20px",
   background: "#FFFFFF",
@@ -45,6 +61,7 @@ const items = [
 ]
 
 const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
+
   return (
     <Modal
       aria-labelledby="transition-modal-title"
@@ -175,7 +192,13 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
             >
               Campaign Mapping
             </Typography>
-            <InputField placeholder="DROPDOWN OF LIST OF CAMPAIGNS + new (will automatically make new campaign)" />
+            
+            <SelectField> 
+              <option>DROPDOWN OF LIST OF CAMPAIGNS + new (will automatically make new campaign)</option>
+              <option>asdf</option>
+              <option>asdf</option>
+              <option>asdf</option>
+            </SelectField>
           </Box>
           <Box sx={{margin: "12px 0 20px 0 !important"}}>
             <Typography

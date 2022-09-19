@@ -3,7 +3,6 @@ import { Container, Box, Typography, TextField, Button } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { BiRightArrowAlt } from "react-icons/bi";
-import logo from "../assets/images/logo.png";
 import "../assets/styles/LandingPage.css";
 
 const accounts = [
@@ -14,9 +13,9 @@ const accounts = [
 ]
 
 const support = [
-  { text: "Help Center" },
-  { text: "Contact us" },
-  { text: "Calcellation Policy" },
+  { text: "Help Center", router: "help-center" },
+  { text: "Contact us", router: "/contactUs" },
+  { text: "Calcellation Policy", router: "/cancellation" },
 ]
 
 const legal = [
@@ -185,7 +184,8 @@ export const Footer = () => {
                     fontSize: "16px",
                     lineHeight: "16px",
                     color: "#A6A6A6",
-                    margin: "9px 0"
+                    margin: "9px 0",
+                    cursor: "pointer",
                   }}>
                     {item.text}
                   </Typography>
@@ -213,8 +213,11 @@ export const Footer = () => {
                     fontSize: "16px",
                     lineHeight: "16px",
                     color: "#A6A6A6",
-                    margin: "9px 0"
-                  }}>
+                    margin: "9px 0",
+                    cursor: "pointer",
+                  }}
+                  onClick={()=>navigate(`${item.router}`)}
+                >
                     {item.text}
                   </Typography>
                 ))
@@ -241,7 +244,8 @@ export const Footer = () => {
                     fontSize: "16px",
                     lineHeight: "16px",
                     color: "#A6A6A6",
-                    margin: "9px 0"
+                    margin: "9px 0",
+                    cursor: "pointer",
                   }}>
                     {item.text}
                   </Typography>
