@@ -26,7 +26,7 @@ export const HowTo = () => {
     return (
         <Box>
             <Box display="flex" flexDirection={{ md: 'row', xs: 'column' }} gap={3} justifyContent="space-between">
-                <Typography variant="h3">How does it work</Typography>
+                <Typography variant="h3">How does it <br/> work</Typography>
                 <Box>
                     <Button variant="contained">Get Started</Button>
                 </Box>

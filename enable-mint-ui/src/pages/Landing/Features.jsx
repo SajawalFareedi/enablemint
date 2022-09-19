@@ -21,7 +21,7 @@ const Feature = ({ icon, title, body }) => {
                 </IconButton>
             </Box>
             <Box>
-                <Typography variant="h5">{title}</Typography>
+                <Typography variant="h5" sx={{fontSize: "27px !important"}}>{title}</Typography>
                 <Typography variant="body1" mt={1}>{body}</Typography>
             </Box>
         </Box>
@@ -29,9 +29,19 @@ const Feature = ({ icon, title, body }) => {
 }
 export const Features = () => {
     return (
-        <Box py={10} px={{ md: 20, xs: '48px' }} bgcolor="#F9F8FE">
+        <Box py={10} px={{ md: 20, xs: '48px' }} bgcolor="#F9F8FE" sx={{
+            ['@media (max-width:500px)']: { // eslint-disable-line no-useless-computed-key
+                paddingLeft: "20px !important",
+                paddingRight: "20px !important",
+            },
+        }}>
             <Grid container spacing={5}>
-                <Grid item xs={12} md={7}>
+                <Grid item xs={12} md={7} sx={{
+                    maxWidth: "55% !important",
+                    ['@media (max-width:900px)']: { // eslint-disable-line no-useless-computed-key
+                        maxWidth: "100% !important",
+                    },
+                }}>
                     <Box>
                         <Typography variant="h3">How can enablemint help?</Typography>
                         <Box mt={15} sx={{
@@ -39,8 +49,9 @@ export const Features = () => {
                                 marginTop: '40px',
                             },
                         }}>
-                            <Typography variant="body2">
-                                Highly Targeted and Effective Demand Generation is possible through enablemint. Our mission is to help Sales & Marketing teams uncover Demand Generation opportunities with our easy-to-use, no-code automation workflows & tools.
+                            <Typography variant="body2" sx={{maxWidth: "95%"}}>
+                                Highly Targeted and Effective Demand Generation is possible through enablemint.
+                                Our mission is to help Sales & Marketing teams uncover Demand Generation opportunities with our easy-to-use, no-code automation workflows & tools.
                             </Typography>
                         </Box>
                         <Box mt={12} display="flex" gap={13} sx={{

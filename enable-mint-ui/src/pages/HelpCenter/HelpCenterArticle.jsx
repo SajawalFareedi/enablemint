@@ -256,7 +256,6 @@ const HelpCenterArticle = () => {
                     color: "#000000",
                     textAlign: "start",
                     margin: "12px 0",
-                    wordBreak: "break-all",
                     ['@media (max-width:500px)']: { // eslint-disable-line no-useless-computed-key 
                       fontSize: "13px",
                       lineHeight: "15px",

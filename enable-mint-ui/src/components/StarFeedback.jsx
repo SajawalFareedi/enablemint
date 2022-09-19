@@ -21,7 +21,7 @@ export const StarFeedback = ({ rate, text }) => {
                 <Typography
                     variant="body2"
                     className="bold"
-                    sx={{ fontSize: 18, fontWeight: 700, color: palette.background.paper }} >
+                    sx={{ fontSize: 18, fontWeight: 700, color: palette.background.paper1 }} >
                     4.9 / 5 rating
                 </Typography>
             </Box>

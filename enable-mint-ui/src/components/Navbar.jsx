@@ -173,6 +173,9 @@ const Navbar = (props) => {
                   fontSize: "16px",
                   lineHeight: "19px",
                   color: '#F8F8FA',
+                  '&:hover': {
+                    background: "#377d3a",
+                  }
                 }}
                 onClick={()=>navigate("/signup")}
               >

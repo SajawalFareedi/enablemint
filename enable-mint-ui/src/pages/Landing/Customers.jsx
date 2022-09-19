@@ -15,13 +15,13 @@ const Testimonial = ({ title, body }) => {
                 <Typography
                     variant="body1"
                     sx={{
-                        color: palette.text.primary,
+                        color: "#191A15",
                         fontWeight: 'bold',
                     }}
                 >
                     {title}
                 </Typography>
-                <Typography variant="body1">{body}</Typography>
+                <Typography variant="body1" sx={{color: "#191A15"}}>{body}</Typography>
             </Box>
         </Box>
     )
