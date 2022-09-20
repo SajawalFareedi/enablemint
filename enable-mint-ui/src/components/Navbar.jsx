@@ -1,67 +1,28 @@
-import * as React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { Container, AppBar, Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography, Button } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { BiChevronDown, BiChevronUp } from "react-icons/bi";
+import Dropdown from "./Dropdown"
 
-import logo from "../assets/images/logo.png";
-import "../assets/styles/Navbar.css";
-
-import { Dropdown } from "."
-
-
-const drawerWidth = 240;
+const drawerWidth = 160;
 const navItems = ["Home", "About us", "Resources", "Pricing"];
 
-export const Navbar = ({ currentPage, window }) => {
+const Navbar = (props) => {
+  const { window, currentPage } = props;
   const navigate = useNavigate();
-
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [show, setShow] = React.useState(true);
-  const [lastScrollY, setLastScrollY] = React.useState(0);
-
-  React.useEffect(() => {
-    const controlNavbar = () => {
-      if (typeof window !== 'undefined') {
-        if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
-          setShow(false);
-        } else { // if scroll up show the navbar
-          setShow(true);
-        }
-
-        // remember current page location to use in the next move
-        setLastScrollY(window.scrollY);
-      }
-    };
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', controlNavbar);
-
-      // cleanup function
-      return () => {
-        window.removeEventListener('scroll', controlNavbar);
-      };
-    }
-  }, [lastScrollY]);
-
-  const changeLocation = React.useCallback((callerID) => {
-    navigate(`/${callerID}`);
-  }, [navigate]);
+  const [resourcesShow, setResourcesShow] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const changeLocation = React.useCallback((callerID) => {
+    navigate(`/${callerID}`);
+  }, [navigate]);
 
   const changeColor = (ref) => {
     if (ref.getAttribute("id") === currentPage) {
@@ -90,18 +51,56 @@ export const Navbar = ({ currentPage, window }) => {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        enablemint
+    <Box sx={{ textAlign: 'center' }}>
+      <Typography sx={{ fontSize: "25px", my: 2, color: "white", fontWeight: 700, marginTop: "30px" }}
+        onClick={handleDrawerToggle}
+      >
+        Enablemint
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            if (item === "Resources") {<Dropdown />}else
-            {
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={item} />
+            { item === "Resources" ?
+            <Box display="flex" flexDirection="column" justifyContent="start" sx={{width: "100%"}}>
+              <ListItemButton sx={{ textAlign: "left", height: "40px", }} onClick={()=>setResourcesShow(!resourcesShow)}>
+                <ListItemText primary="Resources" sx={{color: "white", fontSize: "15px !important"}} />
+                { resourcesShow === true ? <BiChevronUp color='white' /> : <BiChevronDown color='white' /> }
+              </ListItemButton>
+              {
+                resourcesShow && 
+                <Box display="flex" flexDirection="column" 
+                  sx={{marginTop: "-10px"}}
+                >
+                  <Button 
+                    sx={{
+                      marginLeft: "-30px",
+                      color: "white",
+                      fontSize: "14px !important",
+                      fontWeight: 500,
+                      marginBottom: "0px",
+                    }}
+                    onClick={()=>navigate("/help-center")}
+                  >
+                    Help Center
+                  </Button>
+                  <Button 
+                    sx={{
+                      marginLeft: "-30px",
+                      color: "white",
+                      fontSize: "14px !important",
+                      fontWeight: 500,
+                    }}
+                    onClick={()=>navigate("/contact-us")}
+                  >
+                    Contact Us
+                  </Button>
+                </Box>
+              }
+            </Box>
+            : 
+              <ListItemButton sx={{ textAlign: "left", height: '40px' }}>
+                <ListItemText primary={item} sx={{color: "white", fotnSize: '15px'}} />
               </ListItemButton>
             }
           </ListItem>
@@ -113,92 +112,101 @@ export const Navbar = ({ currentPage, window }) => {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <>
-      {/* className={`active ${show && 'hidden'}`} */}
-      <Box sx={{ zIndex: 7898 }}>
-        <AppBar
-          component="nav"
-          sx={{ height: 110, display: "flex", bgcolor: "#161C28" }}
-          style={{ "justifyContent": "center" }}
-        >
-          <Toolbar>
+    <Box sx={{ display: 'flex', padding: "0 50px" }}>
+      <AppBar component="nav"
+        sx={{
+          background: "#161C28",
+        }}
+      >
+        <Container sx={{padding: "10px !important"}}>
+          <Toolbar sx={{
+              padding: "0px !important",
+              ['@media (max-width:600px)']: { // eslint-disable-line no-useless-computed-key 
+                display: "flex",
+                justifyContent: "space-between"
+              }
+            }}
+          >
             <IconButton
               color="inherit"
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
+              sx={{ mr: 2, display: { sm: 'none' } }}
             >
               <MenuIcon />
             </IconButton>
-            <Link to="/">
-              <Box
-                component="img"
-                sx={{ height: 78, width: 78, ml: 17 }}
-                alt="EnableMint Logo"
-                src={logo}
-              />
-            </Link>
             <Typography
               variant="h6"
               component="div"
-              sx={{
-                flexGrow: 1,
-                display: { xs: "none", sm: "block" },
-                fontSize: 24,
+              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, color: "white", cursor:"pointer" }}
+              onClick={()=>navigate("/")}
+            >
+              <img src="/assets/logo-1@2x.png" alt='logo' style={{width: "55px", marginRight: "5px",}} />
+              enablemint
+            </Typography>
+            <Box sx={{ 
+                display: { xs: 'none', sm: 'block' }, 
+                marginRight: "120px", 
+                ['@media (max-width:680px)']: { // eslint-disable-line no-useless-computed-key 
+                  marginRight: "0px", 
+                }
               }}
             >
-              <Link to="/">enablemint</Link>
-            </Typography>
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navItems.map((item) => getNavItem(item))}
             </Box>
-            <Box
-              sx={{ mr: 5, ml: 5, display: { xs: "none", sm: "block" } }}
-            ></Box>
-            <Box sx={{ display: "flex" }} style={{ "justifyContent": "center" }}>
-              <Button
-                sx={{ color: "#fff", mr: 1, ":hover": { color: "#388E3C", bgcolor: "#19d27014" } }}
-                onClick={() => { changeLocation('login') }}
+            <Box>
+              <Button sx={{ color: '#fff' }}
+                onClick={()=>navigate("/login")}
               >
                 Login
               </Button>
               <Button
                 sx={{
-                  mr: 16.3,
-                  borderRadius: 1,
-                  color: "#fff",
-                  bgcolor: "#388E3C",
-                  ":hover": { bgcolor: "#1E5620" },
+                  width: "80px",
+                  height: "40px",
+                  background: "#388E3C",
+                  borderRadius: "10px",
+                  fontFamily: 'Inter',
+                  fontStyle: "normal",
+                  fontWeight: "500",
+                  fontSize: "16px",
+                  lineHeight: "19px",
+                  color: '#F8F8FA',
+                  '&:hover': {
+                    background: "#377d3a",
+                  }
                 }}
-                onClick={() => { changeLocation('signup') }}
+                onClick={()=>navigate("/signup")}
               >
                 Sign Up
               </Button>
             </Box>
           </Toolbar>
-        </AppBar>
-        <Box component="nav">
-          <Drawer
-            container={container}
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-            sx={{
-              display: { xs: "block", sm: "none" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-              },
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Box>
+        </Container>
+      </AppBar>
+      <Box component="nav">
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, background: "#161C28" },
+          }}
+        >
+          {drawer}
+        </Drawer>
       </Box>
-    </>
+    </Box>
   );
+}
+
+Navbar.propTypes = {
+  window: PropTypes.func,
 };
+
+export default Navbar;

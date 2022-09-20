@@ -6,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
 
-export const Dropdown = ({ currentPage }) => {
+const Dropdown = ({ currentPage }) => {
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -45,6 +45,7 @@ export const Dropdown = ({ currentPage }) => {
         Resources
       </Button>
       <Menu
+        sx={{background: "whtie !important"}}
         id="resources-menu"
         anchorEl={anchorEl}
         open={open}
@@ -57,9 +58,11 @@ export const Dropdown = ({ currentPage }) => {
           <Button sx={{ color: "#000", ":hover": { color: "#388E3C", bgcolor: "#fff" } }} onClick={() => { changeLocation('help-center') }}>Help Center</Button>
         </MenuItem>
         <MenuItem onClick={handleClose} sx={{ ":hover": { bgcolor: "#fff" } }}>
-          <Button sx={{ color: "#000", ":hover": { color: "#388E3C", bgcolor: "#fff" } }} onClick={() => { changeLocation('contact') }}>Contact Us</Button>
+          <Button sx={{ color: "#000", ":hover": { color: "#388E3C", bgcolor: "#fff" } }} onClick={() => { changeLocation('contact-us') }}>Contact Us</Button>
         </MenuItem>
       </Menu>
     </>
   );
 };
+
+export default Dropdown
