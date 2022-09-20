@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { Container, Box, Typography } from '@mui/material';
-import { Footer, Navbar } from "../components"
+import { Footer, Navbar } from "../../components"
 
 const LogoutPage = () => {
   return (
