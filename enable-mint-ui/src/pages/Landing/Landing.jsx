@@ -1,20 +1,12 @@
-import { Box, Typography, Grid, Button } from '@mui/material'
+import { Box, Typography, Grid, Button } from '@mui/material';
 
 export const Landing = () => {
     return (
-        <Box mt={{ md: 10, xs: 0 }} sx={{
-        }}>
+        <Box mt={{ md: 10, xs: 0 }}>
             <Grid container spacing={10}>
                 <Grid item xs={12} md={6} sx={{paddingLeft: "0px"}}>
                     <Box display="flex" flexDirection="column" gap={10}>
-                        <Typography variant="h1" sx={{
-                            ['@media (max-width:1100px)']: { // eslint-disable-line no-useless-computed-key
-                                fontSize: '40px'
-                            },
-                            ['@media (max-width:500px)']: { // eslint-disable-line no-useless-computed-key
-                                fontSize: '30px'
-                            },
-                        }}>
+                        <Typography variant="h1">
                             A Newly Minted <br /> Approach to Sales <br /> & Marketing <br /> Enablement
                         </Typography>
                         <Box

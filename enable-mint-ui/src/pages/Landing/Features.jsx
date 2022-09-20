@@ -1,9 +1,6 @@
 import { Box, Grid, Typography, IconButton } from '@mui/material'
 import React from 'react'
-import { StarFeedback } from '../../components/StarFeedback'
-import Graph from '../../assets/images/graph-icon.png'
-import PieChart from '../../assets/images/pie-chart-icon.png'
-import Command from '../../assets/images/command-icon.png'
+import { StarFeedback } from '../../components/StarFeedback';
 
 const Feature = ({ icon, title, body }) => {
     return (
@@ -21,7 +18,16 @@ const Feature = ({ icon, title, body }) => {
                 </IconButton>
             </Box>
             <Box>
-                <Typography variant="h5" sx={{fontSize: "27px !important"}}>{title}</Typography>
+                <Typography sx={{
+                    color: '#191A15',
+                    fontSize: 27,
+                    fontWeight: 700,
+                    fontStyle: 'normal',
+                    lineHeight: 1.1,
+                    ['@media (max-width:769px)']: { // eslint-disable-line no-useless-computed-key
+                        fontSize: "20px",
+                    },
+                }}>{title}</Typography>
                 <Typography variant="body1" mt={1}>{body}</Typography>
             </Box>
         </Box>

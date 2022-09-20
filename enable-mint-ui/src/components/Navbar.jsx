@@ -52,7 +52,7 @@ const Navbar = (props) => {
 
   const drawer = (
     <Box sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2, color: "white", fontWeight: 700, marginTop: "30px" }}
+      <Typography sx={{ fontSize: "25px", my: 2, color: "white", fontWeight: 700, marginTop: "30px" }}
         onClick={handleDrawerToggle}
       >
         Enablemint
@@ -63,8 +63,8 @@ const Navbar = (props) => {
           <ListItem key={item} disablePadding>
             { item === "Resources" ?
             <Box display="flex" flexDirection="column" justifyContent="start" sx={{width: "100%"}}>
-              <ListItemButton sx={{ textAlign: "left" }} onClick={()=>setResourcesShow(!resourcesShow)}>
-                <ListItemText primary="Resources" sx={{color: "white"}} />
+              <ListItemButton sx={{ textAlign: "left", height: "40px", }} onClick={()=>setResourcesShow(!resourcesShow)}>
+                <ListItemText primary="Resources" sx={{color: "white", fontSize: "15px !important"}} />
                 { resourcesShow === true ? <BiChevronUp color='white' /> : <BiChevronDown color='white' /> }
               </ListItemButton>
               {
@@ -76,9 +76,9 @@ const Navbar = (props) => {
                     sx={{
                       marginLeft: "-30px",
                       color: "white",
-                      fontSize: "13px",
+                      fontSize: "14px !important",
                       fontWeight: 500,
-                      marginBottom: "-13px",
+                      marginBottom: "0px",
                     }}
                     onClick={()=>navigate("/help-center")}
                   >
@@ -88,7 +88,7 @@ const Navbar = (props) => {
                     sx={{
                       marginLeft: "-30px",
                       color: "white",
-                      fontSize: "13px",
+                      fontSize: "14px !important",
                       fontWeight: 500,
                     }}
                     onClick={()=>navigate("/contact-us")}
@@ -99,8 +99,8 @@ const Navbar = (props) => {
               }
             </Box>
             : 
-              <ListItemButton sx={{ textAlign: "left" }}>
-                <ListItemText primary={item} sx={{color: "white"}} />
+              <ListItemButton sx={{ textAlign: "left", height: '40px' }}>
+                <ListItemText primary={item} sx={{color: "white", fotnSize: '15px'}} />
               </ListItemButton>
             }
           </ListItem>
@@ -195,7 +195,7 @@ const Navbar = (props) => {
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, background: "#161C28" },
           }}
         >
           {drawer}
