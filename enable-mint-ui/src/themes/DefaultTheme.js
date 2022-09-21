@@ -107,13 +107,13 @@ const createTypographySystem = (fontFamily) => {
         subtitle1: {
             fontFamily,
         },
-           ['@edia (max-width:769px)']: { // eslint-disable-line no-useless-computed-key
+           ['@media (max-width:769px)']: { // eslint-disable-line no-useless-computed-key
                 fontSize: "35px !important",
             },
         subtitle2: {
             fontFamily,
         },
-           ['@edia (max-width:769px)']: { // eslint-disable-line no-useless-computed-key
+           ['@media (max-width:769px)']: { // eslint-disable-line no-useless-computed-key
                 fontSize: "35px !important",
             },
         body1: {
