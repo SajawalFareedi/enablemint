@@ -77,7 +77,7 @@ export default connect(
                 updateData({ cardNumber: String(values.cardNumber).split(' ').join(''), cardDate: values.cardDate, cvv: values.cvv, holderName: values.cardHolder, zipCode: values.postalCode });
                 chargeCard().then((result) => {
                     if (result.success) {
-                        navigate('/');
+                        navigate('/dashboard');
                     }
                 })
             }
@@ -98,6 +98,7 @@ export default connect(
             backgroundImage: `url(/assets/Header_Bg.png)`,
             backgroundSize: "100% 100%",
             backgroundRepeat: "no-repeat",
+            height: '100vh',
         }}>
             <Grid item md={6} xs={12} sx={{
                 backgroundImage: `url(${BackgroundImage})`,
@@ -145,7 +146,7 @@ export default connect(
                                 marginBottom: '30px',
                             }}
                         >
-                            Create your account
+                            Enter payment details
                         </Typography>
 
                         <Box sx={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
@@ -295,7 +296,7 @@ export default connect(
                                 lineHeight: "19px",
                                 color: "#FFFFFF",
                             }}>
-                                Charge <br/>$XX.XX
+                                Charge <br />${amountToCharge}.00
                             </Typography> 
                             <Button type="submit" 
                                 sx={{

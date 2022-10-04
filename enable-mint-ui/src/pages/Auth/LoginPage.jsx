@@ -10,15 +10,15 @@ import BackgroundImage from '../../assets/images/users/Ellipse 460.png'; // Impo
 export const LoginPage = () => {
     const navigate = useNavigate()
 
-;    const validationSchema = yup.object({
-        email: yup
-            .string('Enter your email')
-            .email('Enter a valid email')
-            .required('Email is required'),
-        password: yup
-            .string('Enter your password')
-            .required('Password is required'),
-    });
+        ; const validationSchema = yup.object({
+            email: yup
+                .string('Enter your email')
+                .email('Enter a valid email')
+                .required('Email is required'),
+            password: yup
+                .string('Enter your password')
+                .required('Password is required'),
+        });
 
     const formik = useFormik({
         initialValues: {
@@ -47,7 +47,8 @@ export const LoginPage = () => {
         <Grid container spacing={2} sx={{
             backgroundImage: `url(/assets/Header_Bg.png)`,
             backgroundSize: "100% 100%",
-            backgroundRepeat: "no-repeat",    
+            backgroundRepeat: "no-repeat",
+            height: '100vh',
         }}>
             <Grid item md={6} xs={12} sx={{
                 backgroundImage: `url(${BackgroundImage})`,
@@ -59,16 +60,17 @@ export const LoginPage = () => {
                 },
             }}>
                 <Typography
-                variant="h6"
-                component="div"
-                sx={{ 
-                    color: 'white', 
-                    fontSize: "20px",
-                    lineHeight: "24px",
-                    cursor: "pointer",
-                }}
+                    variant="h6"
+                    component="div"
+                    sx={{
+                        color: 'white',
+                        fontSize: "20px",
+                        lineHeight: "24px",
+                        cursor: "pointer",
+                    }}
+                    onClick={() => navigate('/')}
                 >
-                    <img src="/assets/logo-1@2x.png" alt='logo' style={{ width: "50px", marginRight: "5px",}} />
+                    <img src="/assets/logo-1@2x.png" alt='logo' style={{ width: "50px", marginRight: "5px", }} />
                     enablemint
                 </Typography>
 
@@ -76,7 +78,7 @@ export const LoginPage = () => {
                     width: "70%", margin: "120px 0 0 50px !important",
                     ['@media (max-width:500px)']: { // eslint-disable-line no-useless-computed-key
                         width: "100%", margin: "20px 0 0 0px !important",
-                    },  
+                    },
                 }}>
                     <form onSubmit={formik.handleSubmit}>
                         <Typography
@@ -171,7 +173,7 @@ export const LoginPage = () => {
                                 borderRadius: "12px",
                             }}
                         />
-                        <Typography 
+                        <Typography
                             sx={{
                                 fontFamily: 'Inter',
                                 fontStyle: "normal",
@@ -183,9 +185,9 @@ export const LoginPage = () => {
                                 marginTop: "14px",
                                 cursor: "pointer",
                             }}
-                            onClick={()=>navigate("/reset-password")}
+                            onClick={() => navigate("/reset-password")}
                         >
-                            Forgot your password? 
+                            Forgot your password?
                         </Typography>
 
                         <Box display="flex" justifyContent="center">
@@ -219,14 +221,14 @@ export const LoginPage = () => {
                             textAlign: 'center',
                             marginTop: '40px'
                         }}>
-                            Don’t have an account? 
-                            <span style={{marginLeft: '10px', cursor: "pointer"}} onClick={()=>navigate("/signUp")}>Signup</span>
+                            Don’t have an account?
+                            <span style={{ marginLeft: '10px', cursor: "pointer" }} onClick={() => navigate("/signUp")}>Signup</span>
                         </Typography>
                     </form>
                 </Box>
 
             </Grid>
-            <Grid item md={6} xs={12}  sx={{
+            <Grid item md={6} xs={12} sx={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -234,7 +236,7 @@ export const LoginPage = () => {
                     margin: "20px 0"
                 },
             }}>
-                <img style={{width: '55%'}} src="/assets/users/Asset 3 1.png" />
+                <img style={{ width: '55%' }} src="/assets/users/Asset 3 1.png" />
             </Grid>
         </Grid>
     );

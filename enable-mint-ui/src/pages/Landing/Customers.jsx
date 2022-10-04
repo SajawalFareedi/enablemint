@@ -7,7 +7,7 @@ const Testimonial = ({ title, body }) => {
         <Box display="flex" gap={3}>
             <Box>
                 <IconButton>
-                    <CheckCircleIcon sx={{ color: palette.success.main, fontSize: 24 }} />
+                    <CheckCircleIcon sx={{ color: palette.success.main, fontSize: 30 }} />
                 </IconButton>
             </Box>
             <Box>

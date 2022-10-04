@@ -10,10 +10,10 @@ const FeedbackSubmitApp = () => {
       backgroundRepeat: "no-repeat",
     }}>
       <Container sx={{
-         padding: "150px 15px 60px 15px !important",
+        padding: "150px 15px 60px 15px !important",
       }}>
-        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" 
-          sx={{ 
+        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center"
+          sx={{
             width: "65%", margin: "auto !important",
             ['@media (max-width:992px)']: { // eslint-disable-line no-useless-computed-key 
               width: "90%",
@@ -48,7 +48,7 @@ const FeedbackSubmitApp = () => {
             lineHeight: "30px",
             textAlign: "center",
             color: "#000000",
-            wordBreak: "break-all",
+            wordBreak: "normal",
             margin: "15px 0 20px 0",
             ['@media (max-width:992px)']: { // eslint-disable-line no-useless-computed-key 
               textAlign: "left",
@@ -76,7 +76,7 @@ const FeedbackSubmitApp = () => {
 const TitleField = () => {
   return (
     <Box>
-      <img src='/assets/dashboard/Color-Vector (3).png' style={{width: "38px", height: "25px", margin: "0 15px 6px 0px"}} />
+      <img src='/assets/dashboard/Color-Vector (3).png' style={{ width: "38px", height: "25px", margin: "0 15px 6px 0px" }} />
       Feedback
     </Box>
   )

@@ -11,7 +11,7 @@ export const App = ({ root }) => {
       <Route path="/" element={<Pages.LandingPage />} />
       <Route path="/login" element={<Pages.LoginPage />} />
       <Route path="/reset-password" element={<Pages.ForgetPassword />} />
-      <Route path="/signup" element={<SignUpFlowHandler /> } />
+      <Route path="/signUp" element={<SignUpFlowHandler /> } />
       <Route path="/logout" element={<Pages.LogoutPage />} />
       <Route path="/about-us" element={<Pages.AboutUsPage />} />
       <Route path="/pricing" element={<Pages.Pricing />} />
