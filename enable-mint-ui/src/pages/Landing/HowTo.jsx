@@ -1,4 +1,5 @@
-import { Box, Typography, Button, Grid } from '@mui/material'
+import { Box, Typography, Button, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Component = ({ img, title, body }) => {
     return (
@@ -8,7 +9,7 @@ const Component = ({ img, title, body }) => {
                     width: { sm: 'auto', xs: '100%' },
                 },
                 display: 'flex',
-                justifyContent: { lg: 'left', xs: 'center'},
+                justifyContent: { lg: 'left', xs: 'center' },
             }}>
                 <img src={img} alt="" />
             </Box>
@@ -20,24 +21,25 @@ const Component = ({ img, title, body }) => {
     )
 }
 export const HowTo = () => {
+    const navigate = useNavigate();
     return (
         <Box>
             <Box display="flex" flexDirection={{ md: 'row', xs: 'column' }} gap={3} justifyContent="space-between">
-                <Typography variant="h3">How does it <br/> work</Typography>
+                <Typography variant="h3">How does it work</Typography>
                 <Box>
                     <Button variant="contained" sx={{
                         '&:hover': {
                             background: "#377d3a",
                         }
-                    }}>Get Started</Button>
+                    }} onClick={() => navigate('/signUp')}>Get Started</Button>
                 </Box>
             </Box>
             <Box mt={15} sx={{
-            ['@media (max-width:500px)']: { // eslint-disable-line no-useless-computed-key
-                paddingTop: "0px !important",
-                paddingBottom: "0px !important",
-            },
-        }}>
+                ['@media (max-width:500px)']: { // eslint-disable-line no-useless-computed-key
+                    paddingTop: "0px !important",
+                    paddingBottom: "0px !important",
+                },
+            }}>
                 <Grid container spacing={7}>
                     <Grid item xs={12} md={4}>
                         <Component

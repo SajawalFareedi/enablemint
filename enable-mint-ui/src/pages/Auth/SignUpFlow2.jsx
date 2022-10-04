@@ -87,6 +87,7 @@ export default connect(
             backgroundImage: `url(/assets/Header_Bg.png)`,
             backgroundSize: "100% 100%",
             backgroundRepeat: "no-repeat",
+            height: '100vh',
         }}>
             <Grid item md={6} xs={12} sx={{
                 backgroundImage: `url(${BackgroundImage})`,

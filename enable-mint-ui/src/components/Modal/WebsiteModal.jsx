@@ -67,7 +67,7 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       open={websiteModal}
-      onClose={()=>setWebsiteModal(false)}
+      onClose={() => setWebsiteModal(false)}
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
@@ -100,8 +100,8 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
             Connecting to LinkedIn (need help?)
           </Typography>
 
-          { items.map((item, i)=>(
-            <Box key={i} sx={{margin: "12px 0 20px 0 !important"}}>
+          {items.map((item, i) => (
+            <Box key={i} sx={{ margin: "12px 0 20px 0 !important" }}>
               <Typography
                 sx={{
                   fontFamily: 'Inter',
@@ -120,7 +120,7 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
             </Box>
           ))}
 
-          <Box sx={{display: "flex", alignItems: "center", margin: "20px 0 0px 0",}}>
+          <Box sx={{ display: "flex", alignItems: "center", margin: "20px 0 0px 0", }}>
             <Typography sx={{
               fontFamily: 'Inter',
               fontStyle: "normal",
@@ -129,16 +129,16 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
               lineHeight: "24px",
               color: " #388E3C",
             }}>
-              Automation Settings 
+              Automation Settings
             </Typography>
-            <Typography sx={{ 
+            <Typography sx={{
               fontFamily: 'Inter',
               fontStyle: "normal",
               fontWeight: 700,
               fontSize: "20px",
               lineHeight: "24px",
               color: " #388E3C",
-              textDecoration: "underline", 
+              textDecoration: "underline",
             }}>
               (need help?)
             </Typography>
@@ -154,13 +154,13 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
             padding: "12px 43px",
             color: "#FFFFFF",
             margin: "20px 0 0px 0",
-            wordBreak: "break-all",
+            wordBreak: "normal",
           }}>
-            There is a limit to how much you can automate on LinkedIn (see more) <br/><br/>
+            There is a limit to how much you can automate on LinkedIn (see more) <br /><br />
             It is reccomended that you process ~40 Companies with <BiChevronLeft /> 500 employees per day. If you exceed this amount you will have to update your LinkedIn Cookie Session more frequently.
           </Typography>
-    
-          <Box sx={{margin: "12px 0 20px 0 !important"}}>
+
+          <Box sx={{ margin: "12px 0 20px 0 !important" }}>
             <Typography
               sx={{
                 fontFamily: 'Inter',
@@ -177,7 +177,7 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
             </Typography>
             <InputField placeholder="Enter Number" />
           </Box>
-          <Box sx={{margin: "12px 0 20px 0 !important"}}>
+          <Box sx={{ margin: "12px 0 20px 0 !important" }}>
             <Typography
               sx={{
                 fontFamily: 'Inter',
@@ -192,15 +192,15 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
             >
               Campaign Mapping
             </Typography>
-            
-            <SelectField> 
+
+            <SelectField>
               <option>DROPDOWN OF LIST OF CAMPAIGNS + new (will automatically make new campaign)</option>
               <option>asdf</option>
               <option>asdf</option>
               <option>asdf</option>
             </SelectField>
           </Box>
-          <Box sx={{margin: "12px 0 20px 0 !important"}}>
+          <Box sx={{ margin: "12px 0 20px 0 !important" }}>
             <Typography
               sx={{
                 fontFamily: 'Inter',
@@ -285,8 +285,8 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
               </Button>
             </Box>
           </Box>
-          
-          <Box sx={{margin: "12px 0 20px 0 !important"}}>
+
+          <Box sx={{ margin: "12px 0 20px 0 !important" }}>
             <Typography sx={{
               fontFamily: 'Inter',
               fontStyle: "normal",
@@ -296,7 +296,7 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
               color: "#191A15",
               marginBottom: "10px",
               textAlign: "left",
-            }}> 
+            }}>
               Notifications
             </Typography>
             <Box sx={{
@@ -350,7 +350,7 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
             </Box>
           </Box>
 
-          <Box sx={{display: "flex", flexDirection: 'column', margin: "20px 0 0px 0",}}>
+          <Box sx={{ display: "flex", flexDirection: 'column', margin: "20px 0 0px 0", }}>
             <Typography sx={{
               fontFamily: 'Inter',
               fontStyle: "normal",
@@ -359,7 +359,7 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
               lineHeight: "24px",
               color: " #388E3C",
             }}>
-              Upload Input File (see formatting) 
+              Upload Input File (see formatting)
             </Typography>
 
             <Box sx={{
@@ -382,7 +382,7 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
                   width: "100%"
                 }
               }}>
-                <Box display="flex" justifyContent="center" alignItems="center" 
+                <Box display="flex" justifyContent="center" alignItems="center"
                   sx={{
                     width: "60px",
                     height: "60px",
@@ -391,7 +391,7 @@ const WebsiteModal = ({ websiteModal, setWebsiteModal }) => {
                     cursor: "pointer"
                   }}
                 >
-                  <img style={{width: "25px", height: "25px"}} src="/assets/dashboard/+.png" />
+                  <img style={{ width: "25px", height: "25px" }} src="/assets/dashboard/+.png" />
                 </Box>
                 <Typography sx={{
                   fontFamily: 'Inter',

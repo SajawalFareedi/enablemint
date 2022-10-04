@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { Grid, Typography, Box, Button, TextField,} from "@mui/material";
+import { Grid, Typography, Box, Button, TextField, } from "@mui/material";
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -9,12 +9,12 @@ import BackgroundImage from '../../assets/images/users/Ellipse 460.png'; // Impo
 export const ForgetPassword = () => {
     const navigate = useNavigate()
 
-;    const validationSchema = yup.object({
-        email: yup
-            .string('Enter your email')
-            .email('Enter a valid email')
-            .required('Email is required'),
-    });
+        ; const validationSchema = yup.object({
+            email: yup
+                .string('Enter your email')
+                .email('Enter a valid email')
+                .required('Email is required'),
+        });
 
     const formik = useFormik({
         initialValues: {
@@ -47,14 +47,15 @@ export const ForgetPassword = () => {
                 <Typography
                     variant="h6"
                     component="div"
-                    sx={{ 
-                        color: 'white', 
+                    sx={{
+                        color: 'white',
                         fontSize: "20px",
                         lineHeight: "24px",
                         cursor: "pointer",
                     }}
+                    onClick={() => navigate('/')}
                 >
-                    <img src="/assets/logo-1@2x.png" alt='logo' style={{ width: "50px", marginRight: "5px",}} />
+                    <img src="/assets/logo-1@2x.png" alt='logo' style={{ width: "50px", marginRight: "5px", }} />
                     enablemint
                 </Typography>
 
@@ -62,7 +63,7 @@ export const ForgetPassword = () => {
                     width: "70%", margin: "120px 0 0 50px !important",
                     ['@media (max-width:500px)']: { // eslint-disable-line no-useless-computed-key
                         width: "100%", margin: "20px 0 0 0px !important",
-                    },  
+                    },
                 }}>
                     <form onSubmit={formik.handleSubmit}>
                         <Typography
@@ -151,7 +152,7 @@ export const ForgetPassword = () => {
                                 textAlign: 'center',
                                 color: "#FFFFFF",
                             }}
-                            onClick={()=>navigate("/login")}
+                                onClick={() => navigate("/login")}
                             >
                                 Go back to login
                             </Button>
@@ -161,7 +162,7 @@ export const ForgetPassword = () => {
                 </Box>
 
             </Grid>
-            <Grid item md={6} xs={12}  sx={{
+            <Grid item md={6} xs={12} sx={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -169,7 +170,7 @@ export const ForgetPassword = () => {
                     margin: "20px 0"
                 },
             }}>
-                <img style={{width: '55%'}} src="/assets/users/forgot-password-asset_1 1.png" />
+                <img style={{ width: '55%' }} src="/assets/users/forgot-password-asset_1 1.png" />
             </Grid>
         </Grid>
     );

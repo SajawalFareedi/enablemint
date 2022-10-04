@@ -454,7 +454,7 @@ const MyAccountApp = () => {
 const TitleField = () => {
   return (
     <Box>
-      <img src='/assets/dashboard/Color-Vector (4).png' style={{width: "38px", height: "25px", margin: "0 15px 6px 0px"}} />
+      <img src='/assets/dashboard/Color-Vector (1).png' style={{width: "38px", height: "25px", margin: "0 15px 6px 0px"}} />
       My Account
     </Box>
   )

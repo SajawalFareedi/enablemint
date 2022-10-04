@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useNavigate, createSearchParams } from "react-router-dom";
+import { useNavigate, createSearchParams, useLocation } from "react-router-dom";
 import { Grid, Typography, Box, Button, TextField, InputAdornment, IconButton, Icon } from "@mui/material";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
@@ -25,8 +25,15 @@ export default connect(
     mapDispatchToProps
 )((props) => {
     const navigate = useNavigate();
+    const location = useLocation();
+
     let { updateData } = props;
     let { email, password } = store.getState().signup;
+
+    const qs = location.search.replace('?', '').trim();
+    if (qs.length > 0) {
+        email = decodeURIComponent(qs.split('=')[1]);
+    };
 
     const validationSchema = yup.object({
         email: yup
@@ -50,7 +57,7 @@ export default connect(
             formik.isSubmitting = true;
             updateData({ email: values.email, password: values.password });
             setTimeout(() => {
-                navigate(`/signup?${createSearchParams({ f: "2" })}`);
+                navigate(`/signUp?${createSearchParams({ f: "2" })}`);
             }, 700);
         },
     });
@@ -66,9 +73,11 @@ export default connect(
 
     return (
         <Grid container spacing={2} sx={{
+            // width: 'calc(100% + 40px)',
             backgroundImage: `url(/assets/Header_Bg.png)`,
             backgroundSize: "100% 100%",
             backgroundRepeat: "no-repeat",
+            height: '100vh',
         }}>
             <Grid item md={6} xs={12} sx={{
                 backgroundImage: `url(${BackgroundImage})`,
@@ -80,17 +89,17 @@ export default connect(
                 },
             }}>
                 <Typography
-                variant="h6"
-                component="div"
-                sx={{ 
-                    color: 'white', 
-                    fontSize: "20px",
-                    lineHeight: "24px",
-                    cursor: "pointer",
-                }}
-                onClick={()=>navigate("/")}
+                    variant="h6"
+                    component="div"
+                    sx={{
+                        color: 'white',
+                        fontSize: "20px",
+                        lineHeight: "24px",
+                        cursor: "pointer",
+                    }}
+                    onClick={() => navigate("/")}
                 >
-                    <img src="/assets/logo-1@2x.png" alt='logo' style={{ width: "50px", marginRight: "5px",}} />
+                    <img src="/assets/logo-1@2x.png" alt='logo' style={{ width: "50px", marginRight: "5px", }} />
                     enablemint
                 </Typography>
 
@@ -98,7 +107,7 @@ export default connect(
                     width: "70%", margin: "120px 0 0 50px !important",
                     ['@media (max-width:500px)']: { // eslint-disable-line no-useless-computed-key
                         width: "100%", margin: "20px 0 0 0px !important",
-                    },  
+                    },
                 }}>
                     <form onSubmit={formik.handleSubmit}>
                         <Typography
@@ -196,7 +205,7 @@ export default connect(
                         />
 
                         <Box display="flex" justifyContent="center">
-                            <Button type="submit" 
+                            <Button type="submit"
                                 sx={{
                                     marginTop: "40px",
                                     width: "100%",
@@ -229,8 +238,8 @@ export default connect(
                             textAlign: 'center',
                             marginTop: '40px'
                         }}>
-                            Don’t have an account? 
-                            <span style={{marginLeft: '10px', cursor: "pointer"}} onClick={()=>navigate("/login")}>Login</span>
+                            Already have an account?
+                            <span style={{ marginLeft: '10px', cursor: "pointer" }} onClick={() => navigate("/login")}>Login</span>
                         </Typography>
                         <Typography sx={{
                             fontFamily: 'Inter',
@@ -242,13 +251,13 @@ export default connect(
                             textAlign: 'center',
                             marginTop: '70px'
                         }}>
-                            By creating your account, you are agreeing to the Terms of Service and Privacy Policy
+                            By creating your account, you are agreeing to the <a href="/terms-of-service" style={{ color: "#388e3c" }}>Terms of Service</a> and <a href="/privacy-policy" style={{ color: "#388e3c" }}>Privacy Policy</a>
                         </Typography>
                     </form>
                 </Box>
 
             </Grid>
-            <Grid item md={6} xs={12}  sx={{
+            <Grid item md={6} xs={12} sx={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -256,7 +265,7 @@ export default connect(
                     margin: "20px 0"
                 },
             }}>
-                <img style={{width: '55%'}} src="/assets/users/Asset 15 1.png" />
+                <img style={{ width: '50%' }} src="/assets/users/Asset 15 1.png" />
             </Grid>
         </Grid>
     );

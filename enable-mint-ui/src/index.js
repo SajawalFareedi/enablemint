@@ -1,5 +1,5 @@
 import React from "react";
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from 'redux-persist/integration/react';
 import { createRoot } from 'react-dom/client';
 import { App } from "./App";
 import { BrowserRouter } from "react-router-dom";
@@ -11,13 +11,13 @@ import reportWebVitals from "./reportWebVitals";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./assets/styles/Dashboard.css";
 
-import { theme } from './themes'
+import { theme } from './themes';
 
 const container = document.getElementById("app");
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
+  <>
     <BrowserRouter>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
@@ -30,7 +30,7 @@ root.render(
         </ThemeProvider>
       </StyledEngineProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </>
 );
 
 reportWebVitals(console.log);

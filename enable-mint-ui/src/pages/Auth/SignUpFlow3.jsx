@@ -100,6 +100,7 @@ export default connect(
       backgroundImage: `url(/assets/Header_Bg.png)`,
       backgroundSize: "100% 100%",
       backgroundRepeat: "no-repeat",
+      height: '100vh',
     }}>
       <Grid item md={7} xs={12} sx={{
           backgroundImage: `url(${BackgroundImage})`,
@@ -257,7 +258,7 @@ export default connect(
                         </RadioGroup>
                       </FormControl>
 
-                      { accelerator.map((item, i)=>(
+                      { growth.map((item, i)=>(
                         <Box key={i} display="flex" alignItems="center">
                           <img style={{width: "20px", height: "20px"}} src="/assets/subtract2.svg" />
                           <Typography sx={{
@@ -317,7 +318,7 @@ export default connect(
                             }/>
                         </RadioGroup>
                       </FormControl>
-                      { growth.map((item, i)=>(
+                      { accelerator.map((item, i)=>(
                         <Box key={i} display="flex" alignItems="center">
                           <img style={{width: "20px", height: "20px"}} src="/assets/subtract2.svg" />
                           <Typography sx={{
@@ -410,7 +411,7 @@ export default connect(
                         color: "#FFFFFF",
                         marginTop: '70px',
                         cursor: "pointer",
-                        marginRight: "30px",
+                        marginRight: "114px",
                         ['@media (max-width:600px)']: { // eslint-disable-line no-useless-computed-key
                           marginRight: "0",
                         },  

@@ -28,8 +28,9 @@ const FeedbackApp = () => {
   return (
     <Box sx={{
       backgroundImage: `url(/assets/Header_Bg.png)`,
-      backgroundSize: "100% 100%",
+      // backgroundSize: "100% 100%",
       backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
     }}>
       <Container sx={{
          padding: "150px 15px 60px 15px !important",
@@ -70,7 +71,7 @@ const FeedbackApp = () => {
             lineHeight: "30px",
             textAlign: "center",
             color: "#000000",
-            wordBreak: "break-all",
+            wordBreak: "normal",
             margin: "15px 0 20px 0",
             ['@media (max-width:992px)']: { // eslint-disable-line no-useless-computed-key 
               textAlign: "left",
@@ -155,6 +156,7 @@ const FeedbackApp = () => {
                 Message
               </Typography>
               <TextareaAutosize
+                id="feedback-message"
                 aria-label="minimum height"
                 minRows={3}
                 placeholder="What would you like to say?"
@@ -165,7 +167,7 @@ const FeedbackApp = () => {
                   padding: "16px",
                   height: "80px",
                   fontWeight: 500,
-                  fontSize: "14px",
+                  fontSize: "18px",
                   lineHeight: "17px",
                   color: "#A6A6A6",
                 }}

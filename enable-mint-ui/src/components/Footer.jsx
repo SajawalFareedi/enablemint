@@ -23,21 +23,21 @@ const InputField = styled('input')({
 });
 
 const accounts = [
-  { text: "About us" },
-  { text: "Pricing" },
-  { text: "Sign In" },
-  { text: "Sign Up" },
+  { text: "About us", router: "/about-us" },
+  { text: "Pricing", router: "/pricing" },
+  { text: "Sign In", router: "/login" },
+  { text: "Sign Up", router: "/signUp" },
 ]
 
 const support = [
-  { text: "Help Center", router: "help-center" },
-  { text: "Contact us", router: "/contactUs" },
-  { text: "Cancellation Policy", router: "/cancellation" },
+  { text: "Help Center", router: "/help-center" },
+  { text: "Contact us", router: "/contact-us" },
+  { text: "Cancellation Policy", router: "/cancellation-policy" },
 ]
 
 const legal = [
-  { text: "Terms of Use" },
-  { text: "Privacy Policy" },
+  { text: "Terms of Use", router: "/terms-of-service" },
+  { text: "Privacy Policy", router: "/privacy-policy" },
 ]
 
 export const Footer = () => {
@@ -59,7 +59,7 @@ export const Footer = () => {
       console.log(values);
       formik.isSubmitting = true;
       setTimeout(() => {
-        navigate(`/signup?${createSearchParams({ email: values.email })}`);
+        navigate(`/signUp?${createSearchParams({ email: values.email })}`);
       }, 700);
     },
   });
@@ -68,27 +68,27 @@ export const Footer = () => {
     <Box sx={{
       backgroundColor: "#161C28",
       padding: "80px 0",
-      }}
+    }}
     >
       <Container sx={{
         display: "flex", justifyContent: "space-between",
         ['@media (max-width:768px)']: { // eslint-disable-line no-useless-computed-key 
           flexDirection: "column"
         }
-    }}>
+      }}>
         <Box sx={{}}>
           <Typography
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, color: "white" }}
           >
-            <img src="/assets/logo-1@2x.png" alt='logo' style={{width: "55px", marginRight: "5px",}} />
+            <img src="/assets/logo-1@2x.png" alt='logo' style={{ width: "55px", marginRight: "5px", }} />
             enablemint
           </Typography>
           <Typography
             component="div"
-            sx={{ 
-              color: "#A6A6A6",  
+            sx={{
+              color: "#A6A6A6",
               fontFamily: 'Inter',
               fontStyle: "normal",
               fontWeight: 500,
@@ -108,7 +108,7 @@ export const Footer = () => {
                 width: "300px",
               }
             }}>
-              <InputField 
+              <InputField
                 name="email"
                 type="email"
                 placeholder="Enter your email here"
@@ -122,17 +122,18 @@ export const Footer = () => {
                 focused={false}
               />
               <Button sx={{
-                  minWidth: "46px !important",
-                  height: "46px",
-                  background: "#388E3C",
-                  borderRadius: "50%",
-                  position: "absolute",
-                  top: "27px",
-                  right: "10px",
-                  "&:hover": {
-                    background: "#1E5620",
-                  },
-                }}
+                minWidth: "46px !important",
+                height: "46px",
+                background: "#388E3C",
+                borderRadius: "50%",
+                position: "absolute",
+                top: "27px",
+                right: "10px",
+                "&:hover": {
+                  background: "#1E5620",
+                },
+              }}
+                type="submit"
               >
                 <BiRightArrowAlt color="white" size={30} />
               </Button>
@@ -156,9 +157,9 @@ export const Footer = () => {
           </Typography>
         </Box>
         <Box sx={{
-          display: "flex", 
-          flexDirection: "column", 
-          justifyContent: "space-between", 
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
           width: "45%",
           ['@media (max-width:840px)']: { // eslint-disable-line no-useless-computed-key 
             width: "55%",
@@ -167,8 +168,8 @@ export const Footer = () => {
             width: "100%",
           }
         }}>
-          <Box sx={{display: "flex", justifyContent: "space-between" }}>
-            <Box sx={{display: "flex", flexDirection: "column"}}>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography sx={{
                 fontFamily: 'Inter',
                 fontStyle: "normal",
@@ -181,7 +182,7 @@ export const Footer = () => {
                 Account
               </Typography>
               {
-                accounts.map((item, i)=>(
+                accounts.map((item, i) => (
                   <Typography key={i} sx={{
                     fontFamily: 'Inter',
                     fontStyle: "normal",
@@ -191,13 +192,15 @@ export const Footer = () => {
                     color: "#A6A6A6",
                     margin: "9px 0",
                     cursor: "pointer",
-                  }}>
+                  }}
+                    onClick={() => navigate(`${item.router}`)}
+                  >
                     {item.text}
                   </Typography>
                 ))
               }
             </Box>
-            <Box sx={{display: "flex", flexDirection: "column"}}>
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography sx={{
                 fontFamily: 'Inter',
                 fontStyle: "normal",
@@ -210,7 +213,7 @@ export const Footer = () => {
                 Support
               </Typography>
               {
-                support.map((item, i)=>(
+                support.map((item, i) => (
                   <Typography key={i} sx={{
                     fontFamily: 'Inter',
                     fontStyle: "normal",
@@ -221,14 +224,14 @@ export const Footer = () => {
                     margin: "9px 0",
                     cursor: "pointer",
                   }}
-                  onClick={()=>navigate(`${item.router}`)}
-                >
+                    onClick={() => navigate(`${item.router}`)}
+                  >
                     {item.text}
                   </Typography>
                 ))
               }
             </Box>
-            <Box sx={{display: "flex", flexDirection: "column"}}>
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography sx={{
                 fontFamily: 'Inter',
                 fontStyle: "normal",
@@ -241,7 +244,7 @@ export const Footer = () => {
                 Legal
               </Typography>
               {
-                legal.map((item, i)=>(
+                legal.map((item, i) => (
                   <Typography key={i} sx={{
                     fontFamily: 'Inter',
                     fontStyle: "normal",
@@ -251,27 +254,30 @@ export const Footer = () => {
                     color: "#A6A6A6",
                     margin: "9px 0",
                     cursor: "pointer",
-                  }}>
+
+                  }}
+                    onClick={() => navigate(`${item.router}`)}
+                  >
                     {item.text}
                   </Typography>
                 ))
               }
             </Box>
           </Box>
-          <Box sx={{display: "flex", justifyContent: "end", alignItems: "center" }}>
-              <a href="https://facebook.com/" target="_blank">
-                <img style={{ width: "20px", height: "20px", margin: "0 5px", cursor: "pointer" }} src="/assets/socialicon/facebook.png" />
-              </a>
-              <a href="https://twitter.com/" target="_blank">
-                <img style={{ width: "24px", height: "24px", margin: "0 5px", cursor: "pointer" }} src="/assets/socialicon/Twitter.png" />
-              </a>
-              <a href="https://www.linkedin.com/" target="_blank">
-                <img style={{ width: "24px", height: "24px", margin: "0 5px", cursor: "pointer" }} src="/assets/socialicon/LinkedIn.png" />
-              </a>
+          <Box sx={{ display: "flex", justifyContent: "end", alignItems: "center" }}>
+            <a href="https://facebook.com/" target="_blank">
+              <img style={{ width: "20px", height: "20px", margin: "0 5px", cursor: "pointer" }} src="/assets/socialicon/facebook.png" />
+            </a>
+            <a href="https://twitter.com/" target="_blank">
+              <img style={{ width: "24px", height: "24px", margin: "0 5px", cursor: "pointer" }} src="/assets/socialicon/Twitter.png" />
+            </a>
+            <a href="https://www.linkedin.com/company/enablemint-app/" target="_blank">
+              <img style={{ width: "24px", height: "24px", margin: "0 5px", cursor: "pointer" }} src="/assets/socialicon/LinkedIn.png" />
+            </a>
           </Box>
         </Box>
       </Container>
-  </Box>
+    </Box>
 
   );
 };
