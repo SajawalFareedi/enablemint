@@ -39,8 +39,8 @@ Router.post("/signIn", async (req, res) => {
       console.log("responseresponse", response)
 
       const user = userInfo[0];
-      // if (data.password === userInfo[0].password) {
-      if (response) {
+      if (data.password === userInfo[0].password) {
+      // if (response) {
         const token = jwt.sign(
           { user_id: user.id, email: user.email, type: data.type },
           process.env.TOKEN_SECRET,
