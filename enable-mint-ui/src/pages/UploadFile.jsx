@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Container, Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import jwt_decode from "jwt-decode";
+import Moment from 'moment';
 import Slider from "../components/Slider";
 import config from '../config';
 import LinkedInModal from '../components/Modal/LinkedInModal';
@@ -182,7 +183,7 @@ const UploadFileApp = () => {
                       <TableCell sx={{borderRight: "1px solid #A6A6A6", padding: "20px 0"}} align="center"></TableCell>
                       <TableCell sx={{borderRight: "1px solid #A6A6A6", padding: "20px 0"}} align="center">{item.fileName}</TableCell>
                       <TableCell sx={{borderRight: "1px solid #A6A6A6", padding: "20px 0"}} align="center">{item.comapnyNumber}</TableCell>
-                      <TableCell sx={{borderRight: "1px solid #A6A6A6", padding: "20px 0"}} align="center"></TableCell>
+                      <TableCell sx={{borderRight: "1px solid #A6A6A6", padding: "20px 0"}} align="center">{Moment(item.update_date).format('YYYY-MM-DD HH:mm')}</TableCell>
                       <TableCell align="center">{item.comapnyMapping}</TableCell>
                     </TableRow>
                   ))
