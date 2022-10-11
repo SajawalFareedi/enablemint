@@ -3,6 +3,9 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import { sendFeedback } from "../../apis/sendMail";
 
 const mapStateToProps = (state) => ({ state });
 
@@ -45,8 +48,11 @@ const Feedback = () => {
         validationSchema: validationSchema,
         onSubmit: (values) => {
             formik.isSubmitting = true;
-            setTimeout(() => {
-            }, 700);
+            sendFeedback(values)
+            .then((res)=>{
+                toast.info("Successfully Submited!")
+                navigate("/feedbackSubmit");
+            })
         },
     });
 
@@ -224,7 +230,7 @@ const Feedback = () => {
                         </Box>
                     </form>
                 </Box>
-
+                <ToastContainer />
             </Container>
         </Box>
     )
