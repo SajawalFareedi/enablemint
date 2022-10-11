@@ -9,7 +9,8 @@ Router.post("/sendFeedback", (req, res) => {
     service: 'gmail',
     auth: {
       user: 'adonis0923dev@gmail.com',
-      pass: 'pjxchuuunjqczlau',
+      user: process.env.EMAIL,
+      pass: process.env.password,
     },
   });
   
