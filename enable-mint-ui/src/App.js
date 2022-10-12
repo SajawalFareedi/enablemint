@@ -13,7 +13,8 @@ export const App = ({ root }) => {
       <Routes>
         <Route path="/" element={<Pages.LandingPage />} />
         <Route path="/login" element={<Pages.LoginPage />} />
-        <Route path="/reset-password" element={<Pages.ForgetPassword />} />
+        <Route path="/forgot-password" element={<Pages.ForgetPassword />} />
+        <Route path="/reset-password/:id" element={<Pages.ResetPassword />} />
         <Route path="/signUp" element={<SignUpFlowHandler /> } />
         <Route path="/logout" element={<Pages.LogoutPage />} />
         <Route path="/about-us" element={<Pages.AboutUsPage />} />
@@ -30,7 +31,6 @@ export const App = ({ root }) => {
           <Route path="/uploadFile" element={<Pages.UploadFile />} />
           <Route path="/newCampaign" element={<Pages.NewCampaign />} />
           <Route path="/campaign" element={<Pages.Campaign />} />
-          {/* <Route path="/campaignB" element={<Pages.CampaignB />} /> */}
           <Route path="/campaignX" element={<Pages.CampaignX />} />
           <Route path="/myAccount" element={<Pages.MyAccount />} />
           <Route path="/feedback" element={<Pages.Feedback />} />
