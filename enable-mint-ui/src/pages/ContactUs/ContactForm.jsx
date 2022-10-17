@@ -1,6 +1,9 @@
-import { Box, Card, TextField, Button, Typography, Grid } from "@mui/material";
+import { Box, TextField, Button, Typography, Grid } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import { sendContactSales } from "../../apis/sendMail";
 
 const ContactForm = () => {
 
@@ -55,8 +58,10 @@ const ContactForm = () => {
         validationSchema: validationSchema,
         onSubmit: (values) => {
             formik.isSubmitting = true;
-            setTimeout(() => {
-            }, 700);
+            sendContactSales(values)
+            .then((res)=>{
+                toast.info("Successfully Submited!")
+            })
         },
     });
 
@@ -94,7 +99,7 @@ const ContactForm = () => {
                                 marginBottom: "15px"
                             }}
                         >
-                            Full Name
+                            First Name
                         </Typography>
                         <TextField
                             variant="outlined"
@@ -407,6 +412,7 @@ const ContactForm = () => {
                 sx={{ padding: "0 8px" }}
             >
                 <Button
+                    type="submit"
                     variant="contained"
                     sx={{
                         width: "440px",
@@ -428,6 +434,7 @@ const ContactForm = () => {
                     Contact Us
                 </Button>
             </Box>
+            <ToastContainer />
         </form>
     )
 }

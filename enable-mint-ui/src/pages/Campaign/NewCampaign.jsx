@@ -1,8 +1,14 @@
 import * as React from 'react';
-import { Container, Box, Typography, Button, TextField } from '@mui/material';
-import OutlinedInput from '@mui/material/OutlinedInput';
+import { useState, useEffect, useContext } from 'react';
+import { Container, Box, Typography, Button } from '@mui/material';
+import jwt_decode from "jwt-decode";
 import Slider from "../../components/Slider";
 import { styled } from '@mui/system';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import { createSerializableStateInvariantMiddleware } from '@reduxjs/toolkit';
+import { saveNewCampaign } from "../../apis/dashboard";
+import { Context } from '../../context/AppContext';
 
 const InputField = styled('input')({
   width: "100%",
@@ -20,6 +26,33 @@ const InputField = styled('input')({
 
 
 const NewCampaignApp = () => {
+  const [ name, setName ] = useState("");
+  const [ description, setDescription ]= useState("");
+  const [ email, setEmail ]= useState("");
+  const { campaigns, setCampaigns } = useContext(Context);
+
+  useEffect(()=>{
+    const token = localStorage.getItem("token");
+    const current_user = jwt_decode(token);
+    setEmail(current_user.email)
+  }, [])
+
+  const handleNewCampaign = () => {
+    const formData = {
+      email,
+      name,
+      description,
+    }
+    saveNewCampaign(formData)
+    .then((res)=>{
+      if(res.message === "success") {
+        setCampaigns(res.data);
+        toast.info("New Campaign Successfully Save");
+      } else {
+        toast.error(res.error)
+      }
+    })
+  }
   return (
     <Box sx={{
       backgroundImage: `url(/assets/Header_Bg.png)`,
@@ -73,7 +106,14 @@ const NewCampaignApp = () => {
               >
                 New Campaign Name
               </Typography>
-              <InputField placeholder="Enter New Campaign Name" />
+              <InputField 
+                sx={{
+                  color: "black",
+                  fontSize: "14px",
+                }}
+                placeholder="Enter New Campaign Name"
+                onChange={(e)=>setName(e.target.value)}
+              />
             </Box>
             <Box sx={{marginTop: "25px !important"}}>
               <Typography
@@ -90,31 +130,42 @@ const NewCampaignApp = () => {
               >
                 Description
               </Typography>
-              <InputField placeholder="Enter Description" />
+              <InputField 
+                sx={{
+                  color: "black",
+                  fontSize: "14px",
+                }}
+                placeholder="Enter Description"
+                onChange={(e)=>setDescription(e.target.value)}
+              />
             </Box>
             <Box display="flex" justifyContent="end">
-              <Button sx={{
-                width: "140px",
-                height: "38px",
-                background: "#388E3C",
-                borderRadius: "12px",
-                fontFamily: 'Inter',
-                fontWtyle: "normal",
-                fontWeight: 500,
-                fontSize: "16px",
-                lineHeight: "19px",
-                textAlign: "center",
-                color: "#F8F8FA",
-                marginTop: "45px",
-                "&:hover": {
-                  background: "#3da642",
-                }
-              }}>
+              <Button 
+                sx={{
+                  width: "140px",
+                  height: "38px",
+                  background: "#388E3C",
+                  borderRadius: "12px",
+                  fontFamily: 'Inter',
+                  fontWtyle: "normal",
+                  fontWeight: 500,
+                  fontSize: "16px",
+                  lineHeight: "19px",
+                  textAlign: "center",
+                  color: "#F8F8FA",
+                  marginTop: "45px",
+                  "&:hover": {
+                    background: "#3da642",
+                  }
+                }}
+                onClick={handleNewCampaign}
+              >
                 Save
               </Button>
             </Box>
           </Box>
       </Container>
+      <ToastContainer />
     </Box>
   )
 }
