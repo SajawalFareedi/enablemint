@@ -11,6 +11,7 @@ import store from "../../app/store";
 import BackgroundImage from '../../assets/images/users/Ellipse 460.png'; // Import using relative path
 import { signUpFlow1 } from "../../apis/auth";
 
+
 const mapStateToProps = (state) => ({ state });
 
 const mapDispatchToProps = (dispatch) => {
@@ -57,22 +58,21 @@ export default connect(
         validationSchema: validationSchema,
         onSubmit: (values) => {
             formik.isSubmitting = true;
-            updateData({ email: values.email, password: values.password });
+            // updateData({ email: values.email, password: values.password });
             signUpFlow1(values)
-            .then((res)=>{
-                if(res.status === "success") {
-                    navigate(`/signUp?${createSearchParams({ f: "2" })}`, { state: values.email});
-                }
-                else {
-                    if(res.data[0].firstname === null) {
-                        navigate(`/signUp?${createSearchParams({ f: "2" })}`, { state: values.email});
+                .then((res) => {
+                    if (res.status === "success") {
+                        navigate(`/signUp?${createSearchParams({ f: "2" })}`, { state: values.email });
+                    } else {
+                        if (res.data[0].firstname === null) {
+                            navigate(`/signUp?${createSearchParams({ f: "2" })}`, { state: values.email });
+                        }
+                        else if (res.data[0].freeTrial === null) {
+                            navigate(`/signUp?${createSearchParams({ f: "3" })}`, { state: values.email });
+                        }
+                        toast.error(res.error);
                     }
-                    else if(res.data[0].freeTrial === null) {
-                        navigate(`/signUp?${createSearchParams({ f: "3" })}`, { state: values.email});
-                    }
-                    toast.error(res.error);
-                }
-            })
+                })
         },
     });
 

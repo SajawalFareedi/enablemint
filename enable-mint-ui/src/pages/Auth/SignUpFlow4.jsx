@@ -77,22 +77,23 @@ export default connect(
         onSubmit: (values) => {
             formik.isSubmitting = true;
             // if (isValidCard(values)) {
-                updateData({ cardNumber: String(values.cardNumber).split(' ').join(''), cardDate: values.cardDate, cvv: values.cvv, holderName: values.cardHolder, zipCode: values.postalCode });
-                const formData = {
-                    email: state,
-                    values,
-                }
-                signUpFlow4(formData)
-                .then((res)=>{
-                    if(res.status === "success") {
+            // updateData({ cardNumber: String(values.cardNumber).split(' ').join(''), cardDate: values.cardDate, cvv: values.cvv, holderName: values.cardHolder, zipCode: values.postalCode });
+            const formData = {
+                email: state,
+                values,
+            }
+            signUpFlow4(formData)
+                .then((res) => {
+                    if (res.status === "success") {
+
                         navigate('/dashboard')
                     } else toast.error(res.error)
                 })
-                // chargeCard().then((result) => {
-                //     if (result.success) {
-                //         navigate('/dashboard');
-                //     }
-                // })
+            // chargeCard().then((result) => {
+            //     if (result.success) {
+            //         navigate('/dashboard');
+            //     }
+            // })
             // }
         },
     });
@@ -126,17 +127,17 @@ export default connect(
                 },
             }}>
                 <Typography
-                variant="h6"
-                component="div"
-                sx={{ 
-                    color: 'white', 
-                    fontSize: "20px",
-                    lineHeight: "24px",
-                    cursor: "pointer",
-                }}
-                onClick={()=>navigate("/")}
+                    variant="h6"
+                    component="div"
+                    sx={{
+                        color: 'white',
+                        fontSize: "20px",
+                        lineHeight: "24px",
+                        cursor: "pointer",
+                    }}
+                    onClick={() => navigate("/")}
                 >
-                    <img src="/assets/logo-1@2x.png" alt='logo' style={{ width: "50px", marginRight: "5px",}} />
+                    <img src="/assets/logo-1@2x.png" alt='logo' style={{ width: "50px", marginRight: "5px", }} />
                     enablemint
                 </Typography>
 
@@ -144,7 +145,7 @@ export default connect(
                     width: "70%", margin: "120px 0 0 50px !important",
                     ['@media (max-width:500px)']: { // eslint-disable-line no-useless-computed-key
                         width: "100%", margin: "20px 0 0 0px !important",
-                    },  
+                    },
                 }}>
                     <form onSubmit={formik.handleSubmit}>
                         <Typography
@@ -162,8 +163,8 @@ export default connect(
                             Enter payment details
                         </Typography>
 
-                        <Box sx={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
-                            <Box sx={{margin: "9px 0"}}>
+                        <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                            <Box sx={{ margin: "9px 0" }}>
                                 <InputMask mask="9999 9999 9999 9999 999" value={formik.values.cardNumber} onChange={formik.handleChange} onBlur={formik.handleBlur} maskPlaceholder={null}>
                                     <TextField
                                         color="success"
@@ -188,7 +189,7 @@ export default connect(
                                 </InputMask>
                             </Box>
 
-                            <Box sx={{display: "flex", justifyContent: "space-between", margin: "9px 0"}}>  
+                            <Box sx={{ display: "flex", justifyContent: "space-between", margin: "9px 0" }}>
                                 <InputMask mask={cardExpiryMask} value={formik.values.cardDate} onChange={formik.handleChange} onBlur={formik.handleBlur} maskPlaceholder={null}>
                                     <TextField
                                         color="success"
@@ -248,7 +249,7 @@ export default connect(
                         </Box>
 
 
-                        <Box sx={{margin: "9px 0"}}>
+                        <Box sx={{ margin: "9px 0" }}>
                             <TextField
                                 color="success"
                                 variant="outlined"
@@ -273,7 +274,7 @@ export default connect(
                             />
                         </Box>
 
-                        <Box sx={{display: "flex", flexDirection: 'column', justifyContent: "space-between", margin: "18px 0"}}>
+                        <Box sx={{ display: "flex", flexDirection: 'column', justifyContent: "space-between", margin: "18px 0" }}>
                             <TextField
                                 color="success"
                                 variant="outlined"
@@ -310,8 +311,8 @@ export default connect(
                                 color: "#FFFFFF",
                             }}>
                                 Charge <br />${amountToCharge}.00
-                            </Typography> 
-                            <Button type="submit" 
+                            </Typography>
+                            <Button type="submit"
                                 sx={{
                                     width: "50%",
                                     height: "50px",
@@ -333,8 +334,8 @@ export default connect(
                                 Purchase Plan
                             </Button>
                         </Box>
-                        
-                        <Typography 
+
+                        <Typography
                             sx={{
                                 fontFamily: 'Inter',
                                 fontStyle: "normal",
@@ -347,7 +348,7 @@ export default connect(
                                 color: "#FFFFFF",
                                 cursor: "pointer",
                             }}
-                            onClick={()=>navigate(-1)}
+                            onClick={() => navigate(-1)}
                         >
                             Back
                         </Typography>
@@ -355,7 +356,7 @@ export default connect(
                 </Box>
 
             </Grid>
-            <Grid item md={6} xs={12}  sx={{
+            <Grid item md={6} xs={12} sx={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -363,7 +364,7 @@ export default connect(
                     margin: "20px 0"
                 },
             }}>
-                <img style={{width: '55%'}} src="/assets/users/Asset 1 6.png" />
+                <img style={{ width: '55%' }} src="/assets/users/Asset 1 6.png" />
             </Grid>
             <ToastContainer />
         </Grid>

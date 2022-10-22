@@ -1,5 +1,6 @@
 import config from "../config";
 
+
 const login = (formData, history) => {
   return fetch(`${config.server_url}api/authRoutes/signIn`, {
     method: "POST",
@@ -10,9 +11,9 @@ const login = (formData, history) => {
       ...formData,
     }),
   })
-  .then((res) =>{
-    return res.json();
-  } );
+    .then((res) => {
+      return res.json();
+    });
 };
 
 const forgotPassword = (formData, history) => {
@@ -25,9 +26,9 @@ const forgotPassword = (formData, history) => {
       ...formData,
     }),
   })
-  .then((res) =>{
-    return res.json();
-  } );
+    .then((res) => {
+      return res.json();
+    });
 };
 
 const resetPassword = (formData, history) => {
@@ -40,9 +41,9 @@ const resetPassword = (formData, history) => {
       ...formData,
     }),
   })
-  .then((res) =>{
-    return res.json();
-  } );
+    .then((res) => {
+      return res.json();
+    });
 };
 
 const signUpFlow1 = (formData, history) => {
@@ -55,9 +56,9 @@ const signUpFlow1 = (formData, history) => {
       ...formData,
     }),
   })
-  .then((res) =>{
-    return res.json();
-  } );
+    .then((res) => {
+      return res.json();
+    });
 };
 
 const signUpFlow2 = (formData, history) => {
@@ -70,9 +71,9 @@ const signUpFlow2 = (formData, history) => {
       ...formData,
     }),
   })
-  .then((res) =>{
-    return res.json();
-  } );
+    .then((res) => {
+      return res.json();
+    });
 };
 
 const signUpFlow3 = (formData, history) => {
@@ -85,9 +86,9 @@ const signUpFlow3 = (formData, history) => {
       ...formData,
     }),
   })
-  .then((res) =>{
-    return res.json();
-  } );
+    .then((res) => {
+      return res.json();
+    });
 };
 
 const signUpFlow4 = (formData, history) => {
@@ -100,9 +101,9 @@ const signUpFlow4 = (formData, history) => {
       ...formData,
     }),
   })
-  .then((res) =>{
-    return res.json();
-  } );
+    .then((res) => {
+      return res.json();
+    });
 };
 
 export { login, signUpFlow1, signUpFlow2, signUpFlow3, signUpFlow4, forgotPassword, resetPassword }

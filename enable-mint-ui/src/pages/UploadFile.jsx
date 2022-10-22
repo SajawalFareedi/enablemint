@@ -8,19 +8,20 @@ import config from '../config';
 import LinkedInModal from '../components/Modal/LinkedInModal';
 import WebsiteModal from '../components/Modal/WebsiteModal';
 
+
 const UploadFileApp = () => {
-  const [ email, setEmail ] = useState("");
+  const [email, setEmail] = useState("");
   const [websiteModal, setWebsiteModal] = useState(false);
   const [linkedInModal, setLinkedInModal] = useState(false);
   const [workFlowWebsites, setWorkFlowWebsites] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const token = localStorage.getItem("token");
     const current_user = jwt_decode(token);
     setEmail(current_user.email);
   }, [])
 
-  useEffect( () => {
+  useEffect(() => {
     const fetchPosts = async () => {
       const res = await fetch(`${config.server_url}api/dashboardRoutes/getUploadWebsite/${email}`);
       const data = await res.json();
@@ -29,8 +30,7 @@ const UploadFileApp = () => {
     fetchPosts();
   }, [email]);
 
-  console.log("workFlowWebsites", workFlowWebsites)
-  
+
   return (
     <Box sx={{
       backgroundImage: `url(/assets/Header_Bg.png)`,
@@ -88,10 +88,10 @@ const UploadFileApp = () => {
                 fontSize: "16px",
                 lineGeight: "19px",
                 color: "#191A15",
-            }}>
+              }}>
               Drop your file
             </Typography>
-            <Box display="flex" justifyContent="center" alignItems="center" 
+            <Box display="flex" justifyContent="center" alignItems="center"
               sx={{
                 width: "60px",
                 height: "60px",
@@ -99,9 +99,9 @@ const UploadFileApp = () => {
                 background: "#388E3C",
                 cursor: "pointer"
               }}
-              onClick={()=>setWebsiteModal(true)}
+              onClick={() => setWebsiteModal(true)}
             >
-              <Box component="img" sx={{width: "25px", height: "25px", margin: "0 !important"}} src="/assets/dashboard/+.png" />
+              <Box component="img" sx={{ width: "25px", height: "25px", margin: "0 !important" }} src="/assets/dashboard/+.png" />
             </Box>
           </Box>
           <Box sx={{
@@ -140,10 +140,10 @@ const UploadFileApp = () => {
                 fontSize: "16px",
                 lineGeight: "19px",
                 color: "#191A15",
-            }}>
+              }}>
               Drop your file
             </Typography>
-            <Box display="flex" justifyContent="center" alignItems="center" 
+            <Box display="flex" justifyContent="center" alignItems="center"
               sx={{
                 width: "60px",
                 height: "60px",
@@ -151,48 +151,48 @@ const UploadFileApp = () => {
                 background: "#388E3C",
                 cursor: "pointer"
               }}
-              onClick={()=>setLinkedInModal(true)}
+              onClick={() => setLinkedInModal(true)}
             >
-              <img style={{width: "25px", height: "25px"}} src="/assets/dashboard/+.png" />
+              <img style={{ width: "25px", height: "25px" }} src="/assets/dashboard/+.png" />
             </Box>
           </Box>
         </Box>
 
-        <TableContainer component={Paper} 
-            sx={{ 
-              boxShadow: "none",
-              borderBottomLeftRadius: "15px",
-              borderBottomRightRadius: "15px",
-            }}
-          >
-            <Table sx={{ }} aria-label="simple table">
-              <TableHead>
-                <TableRow sx={{background: "#388E3C"}}>
-                  <TableCell sx={{padding: "5px", color: "white", width: "12%" }} align="center">Queries</TableCell>
-                  <TableCell sx={{padding: "5px 0 5px 20px", color: "white", width: "25%" }} align="left">File Name</TableCell>
-                  <TableCell sx={{padding: "5px", color: "white", width: "12%" }} align="center">Scrape per day</TableCell>
-                  <TableCell sx={{padding: "5px", color: "white", width: "12%" }} align="center">Date Uploaded</TableCell>
-                  <TableCell sx={{padding: "5px", color: "white", width: "12%" }} align="center">Campaign</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody sx={{backgroundColor: "white"}}>
-                {
-                  workFlowWebsites.map((item, i)=>(
-                    <TableRow key={i}>
-                      <TableCell sx={{borderRight: "1px solid #A6A6A6", padding: "20px 0"}} align="center"></TableCell>
-                      <TableCell sx={{borderRight: "1px solid #A6A6A6", padding: "20px 0"}} align="center">{item.fileName}</TableCell>
-                      <TableCell sx={{borderRight: "1px solid #A6A6A6", padding: "20px 0"}} align="center">{item.comapnyNumber}</TableCell>
-                      <TableCell sx={{borderRight: "1px solid #A6A6A6", padding: "20px 0"}} align="center">{Moment(item.update_date).format('YYYY-MM-DD HH:mm')}</TableCell>
-                      <TableCell align="center">{item.comapnyMapping}</TableCell>
-                    </TableRow>
-                  ))
-                }
-              </TableBody>
-            </Table>
+        <TableContainer component={Paper}
+          sx={{
+            boxShadow: "none",
+            borderBottomLeftRadius: "15px",
+            borderBottomRightRadius: "15px",
+          }}
+        >
+          <Table sx={{}} aria-label="simple table">
+            <TableHead>
+              <TableRow sx={{ background: "#388E3C" }}>
+                <TableCell sx={{ padding: "5px", color: "white", width: "12%" }} align="center">Queries</TableCell>
+                <TableCell sx={{ padding: "5px 0 5px 20px", color: "white", width: "25%" }} align="left">File Name</TableCell>
+                <TableCell sx={{ padding: "5px", color: "white", width: "12%" }} align="center">Scrape per day</TableCell>
+                <TableCell sx={{ padding: "5px", color: "white", width: "12%" }} align="center">Date Uploaded</TableCell>
+                <TableCell sx={{ padding: "5px", color: "white", width: "12%" }} align="center">Campaign</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody sx={{ backgroundColor: "white" }}>
+              {
+                workFlowWebsites.map((item, i) => (
+                  <TableRow key={i}>
+                    <TableCell sx={{ borderRight: "1px solid #A6A6A6", padding: "20px 0" }} align="center"></TableCell>
+                    <TableCell sx={{ borderRight: "1px solid #A6A6A6", padding: "20px 0" }} align="center">{item.fileName}</TableCell>
+                    <TableCell sx={{ borderRight: "1px solid #A6A6A6", padding: "20px 0" }} align="center">{item.comapnyNumber}</TableCell>
+                    <TableCell sx={{ borderRight: "1px solid #A6A6A6", padding: "20px 0" }} align="center">{Moment(item.update_date).format('YYYY-MM-DD HH:mm')}</TableCell>
+                    <TableCell align="center">{item.comapnyMapping}</TableCell>
+                  </TableRow>
+                ))
+              }
+            </TableBody>
+          </Table>
         </TableContainer>
       </Container>
-      <WebsiteModal  websiteModal={websiteModal} setWebsiteModal={setWebsiteModal} workFlowWebsites={workFlowWebsites} setWorkFlowWebsites={setWorkFlowWebsites}/>
-      <LinkedInModal linkedInModal={linkedInModal} setLinkedInModal={setLinkedInModal} workFlowWebsites={workFlowWebsites} setWorkFlowWebsites={setWorkFlowWebsites}/>
+      <WebsiteModal websiteModal={websiteModal} setWebsiteModal={setWebsiteModal} workFlowWebsites={workFlowWebsites} setWorkFlowWebsites={setWorkFlowWebsites} />
+      <LinkedInModal linkedInModal={linkedInModal} setLinkedInModal={setLinkedInModal} workFlowWebsites={workFlowWebsites} setWorkFlowWebsites={setWorkFlowWebsites} />
     </Box>
   )
 }
@@ -200,7 +200,7 @@ const UploadFileApp = () => {
 const TitleField = () => {
   return (
     <Box>
-      <img src='/assets/dashboard/Color-Vector.png' style={{width: "38px", height: "25px", margin: "0 15px 6px 0px"}} />
+      <img src='/assets/dashboard/Color-Vector.png' style={{ width: "38px", height: "25px", margin: "0 15px 6px 0px" }} />
       Upload Tool
     </Box>
   )
@@ -214,4 +214,4 @@ const UploadFile = () => {
   )
 }
 
-export default UploadFile
+export default UploadFile;

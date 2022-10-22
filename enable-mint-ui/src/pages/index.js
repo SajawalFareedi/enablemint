@@ -21,7 +21,6 @@ export { default as Dashboard } from "./Dashboard";
 export { default as UploadFile } from "./UploadFile";
 export { default as NewCampaign } from "./Campaign/NewCampaign";
 export { default as Campaign } from "./Campaign/Campaign";
-export { default as CampaignB } from "./Campaign/CampaignB";
 export { default as CampaignX } from "./Campaign/CampaignX";
 export { default as MyAccount } from "./MyAccount";
 export { default as Feedback } from "./Feedback";

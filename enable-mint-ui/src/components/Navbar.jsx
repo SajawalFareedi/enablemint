@@ -13,12 +13,12 @@ const navItems = ["Home", "About us", "Resources", "Pricing"];
 const Navbar = (props) => {
   const { window, currentPage } = props;
   const navigate = useNavigate();
-  const [ isAuth, setIsAuth ] = useState(false)
+  const [isAuth, setIsAuth] = useState(false)
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [resourcesShow, setResourcesShow] = React.useState(false);
 
-  useEffect(()=>{
-    if(localStorage.getItem("token")) {
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
       setIsAuth(true);
     } else setIsAuth(false);
   }, [])
@@ -27,8 +27,6 @@ const Navbar = (props) => {
     localStorage.removeItem("token");
     setIsAuth(false)
   }
-
-  console.log("authttht", isAuth)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -54,8 +52,8 @@ const Navbar = (props) => {
         <Button
           key={_item}
           id={_item}
-          sx={{ 
-            mr: 0.4, color: "#fff", ":hover": { color: "#388E3C", bgcolor: "#19d27014",},
+          sx={{
+            mr: 0.4, color: "#fff", ":hover": { color: "#388E3C", bgcolor: "#19d27014", },
             ['@media (max-width:769px)']: { // eslint-disable-line no-useless-computed-key 
               padding: "6px 0px !important",
             },
@@ -71,12 +69,12 @@ const Navbar = (props) => {
 
   const drawer = (
     <Box sx={{ textAlign: 'center' }}>
-      <Typography sx={{ 
+      <Typography sx={{
         fontSize: "25px", my: 2, color: "white", fontWeight: 700, marginTop: "30px",
         ['@media (max-width:769px)']: { // eslint-disable-line no-useless-computed-key 
           fontSize: "23px !important",
         },
-        }}
+      }}
         onClick={handleDrawerToggle}
       >
         Enablemint
@@ -85,46 +83,46 @@ const Navbar = (props) => {
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            { item === "Resources" ?
-            <Box display="flex" flexDirection="column" justifyContent="start" sx={{width: "100%"}}>
-              <ListItemButton sx={{ textAlign: "left", height: "40px", }} onClick={()=>setResourcesShow(!resourcesShow)}>
-                <ListItemText primary="Resources" sx={{color: "white", fontSize: "15px !important"}} />
-                { resourcesShow === true ? <BiChevronUp color='white' /> : <BiChevronDown color='white' /> }
-              </ListItemButton>
-              {
-                resourcesShow && 
-                <Box display="flex" flexDirection="column" 
-                  sx={{marginTop: "-10px"}}
-                >
-                  <Button 
-                    sx={{
-                      marginLeft: "-30px",
-                      color: "white",
-                      fontSize: "14px !important",
-                      fontWeight: 500,
-                      marginBottom: "0px",
-                    }}
-                    onClick={()=>navigate("/help-center")}
+            {item === "Resources" ?
+              <Box display="flex" flexDirection="column" justifyContent="start" sx={{ width: "100%" }}>
+                <ListItemButton sx={{ textAlign: "left", height: "40px", }} onClick={() => setResourcesShow(!resourcesShow)}>
+                  <ListItemText primary="Resources" sx={{ color: "white", fontSize: "15px !important" }} />
+                  {resourcesShow === true ? <BiChevronUp color='white' /> : <BiChevronDown color='white' />}
+                </ListItemButton>
+                {
+                  resourcesShow &&
+                  <Box display="flex" flexDirection="column"
+                    sx={{ marginTop: "-10px" }}
                   >
-                    Help Center
-                  </Button>
-                  <Button 
-                    sx={{
-                      marginLeft: "-30px",
-                      color: "white",
-                      fontSize: "14px !important",
-                      fontWeight: 500,
-                    }}
-                    onClick={()=>navigate("/contact-us")}
-                  >
-                    Contact Us
-                  </Button>
-                </Box>
-              }
-            </Box>
-            : 
+                    <Button
+                      sx={{
+                        marginLeft: "-30px",
+                        color: "white",
+                        fontSize: "14px !important",
+                        fontWeight: 500,
+                        marginBottom: "0px",
+                      }}
+                      onClick={() => navigate("/help-center")}
+                    >
+                      Help Center
+                    </Button>
+                    <Button
+                      sx={{
+                        marginLeft: "-30px",
+                        color: "white",
+                        fontSize: "14px !important",
+                        fontWeight: 500,
+                      }}
+                      onClick={() => navigate("/contact-us")}
+                    >
+                      Contact Us
+                    </Button>
+                  </Box>
+                }
+              </Box>
+              :
               <ListItemButton sx={{ textAlign: "left", height: '40px' }}>
-                <ListItemText primary={item} sx={{color: "white", fotnSize: '15px'}} />
+                <ListItemText primary={item} sx={{ color: "white", fotnSize: '15px' }} />
               </ListItemButton>
             }
           </ListItem>
@@ -142,14 +140,14 @@ const Navbar = (props) => {
           background: "#161C28",
         }}
       >
-        <Container sx={{padding: "10px !important"}}>
+        <Container sx={{ padding: "10px !important" }}>
           <Toolbar sx={{
-              padding: "0px !important",
-              ['@media (max-width:600px)']: { // eslint-disable-line no-useless-computed-key 
-                display: "flex",
-                justifyContent: "space-between"
-              }
-            }}
+            padding: "0px !important",
+            ['@media (max-width:600px)']: { // eslint-disable-line no-useless-computed-key 
+              display: "flex",
+              justifyContent: "space-between"
+            }
+          }}
           >
             <IconButton
               color="inherit"
@@ -163,12 +161,13 @@ const Navbar = (props) => {
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, color: "white", cursor:"pointer",
+              sx={{
+                flexGrow: 1, display: { xs: 'none', sm: 'block' }, color: "white", cursor: "pointer",
                 ['@media (max-width:769px)']: { // eslint-disable-line no-useless-computed-key 
                   fontSize: "20px !important",
                 },
               }}
-              onClick={()=>navigate("/")}
+              onClick={() => navigate("/")}
             >
               <Box component="img" src="/assets/logo-1@2x.png" sx={{
                 width: "55px", marginRight: "5px",
@@ -178,38 +177,20 @@ const Navbar = (props) => {
               }} />
               enablemint
             </Typography>
-            <Box sx={{ 
-                display: { xs: 'none', sm: 'block' }, 
-                marginRight: "120px", 
-                ['@media (max-width:855px)']: { // eslint-disable-line no-useless-computed-key 
-                  marginRight: "0px", 
-                }
-              }}
+            <Box sx={{
+              display: { xs: 'none', sm: 'block' },
+              marginRight: "120px",
+              ['@media (max-width:855px)']: { // eslint-disable-line no-useless-computed-key 
+                marginRight: "0px",
+              }
+            }}
             >
               {navItems.map((item) => getNavItem(item))}
             </Box>
-            { isAuth && 
-              <Button sx={{ 
-                color: '#fff', 
-                marginRight: "15px",
-                '&:hover': {
-                  padding: '9px 8px',
-                  color: "rgb(56, 142, 60)",
-                  backgroundColor: "rgba(25, 210, 112, 0.08)",
-                },
-                ['@media (max-width:769px)']: { // eslint-disable-line no-useless-computed-key 
-                  marginRight: "5px",
-                },
-              }}
-                onClick={handleLogout}
-              >
-                Logout
-              </Button>
-            }
-            { !isAuth &&
+            {isAuth &&
               <Box>
-                <Button sx={{ 
-                  color: '#fff', 
+                <Button sx={{
+                  color: '#fff',
                   marginRight: "15px",
                   '&:hover': {
                     padding: '9px 8px',
@@ -220,7 +201,52 @@ const Navbar = (props) => {
                     marginRight: "5px",
                   },
                 }}
-                  onClick={()=>navigate("/login")}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+                <Button
+                  sx={{
+                    width: "110px",
+                    height: "40px",
+                    background: "#388E3C",
+                    borderRadius: "12px",
+                    fontFamily: 'Inter',
+                    fontStyle: "normal",
+                    fontWeight: "500",
+                    fontSize: "16px",
+                    lineHeight: "19px",
+                    color: '#F8F8FA',
+                    '&:hover': {
+                      background: "#377d3a",
+                    },
+                    ['@media (max-width:769px)']: { // eslint-disable-line no-useless-computed-key 
+                      fontSize: "15px",
+                      width: "110px",
+                      height: "33px",
+                    },
+                  }}
+                  onClick={() => navigate("/dashboard")}
+                >
+                  Dashboard
+                </Button>
+              </Box>
+            }
+            {!isAuth &&
+              <Box>
+                <Button sx={{
+                  color: '#fff',
+                  marginRight: "15px",
+                  '&:hover': {
+                    padding: '9px 8px',
+                    color: "rgb(56, 142, 60)",
+                    backgroundColor: "rgba(25, 210, 112, 0.08)",
+                  },
+                  ['@media (max-width:769px)']: { // eslint-disable-line no-useless-computed-key 
+                    marginRight: "5px",
+                  },
+                }}
+                  onClick={() => navigate("/login")}
                 >
                   Login
                 </Button>
@@ -245,7 +271,7 @@ const Navbar = (props) => {
                       height: "33px",
                     },
                   }}
-                  onClick={()=>navigate("/signup")}
+                  onClick={() => navigate("/signup")}
                 >
                   Sign Up
                 </Button>

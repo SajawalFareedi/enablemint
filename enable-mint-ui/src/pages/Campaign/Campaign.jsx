@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Container, Box, Typography, Button, } from '@mui/material';
+import { ToastContainer, toast } from 'react-toastify';
 import Slider from "../../components/Slider";
 
 const workFlowFiles = [
@@ -17,14 +18,47 @@ const emailFinderTool = [
 
 const Campaign = () => {
   const { state } = useLocation();
-  
+
+  const handleCampaignDelete = () => {
+    toast.info("Campaign is deleted successfully!");
+  };
+
   const TitleField = () => {
-    return (
+    return <Box
+      sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}
+    >
       <Box>
-        <img src='/assets/dashboard/Color-Vector (3).png' style={{ width: "38px", height: "25px", margin: "0 15px 6px 0px" }} />
+        <img src='/assets/dashboard/Color-Vector (3).png' alt="" style={{ width: "38px", height: "25px", margin: "0 15px 6px 0px" }} />
         {state.name}
       </Box>
-    )
+      <Button
+        sx={{
+          width: "160px",
+          height: "40px",
+          background: "transparent",
+          borderRadius: "7px",
+          fontFamily: 'Inter',
+          fontStyle: "normal",
+          fontWeight: "500",
+          fontSize: "16px",
+          lineHeight: "19px",
+          color: '#ff0000',
+          '&:hover': {
+            background: "#ff0000",
+            color: "#fff"
+          },
+          ['@media (max-width:769px)']: { // eslint-disable-line no-useless-computed-key 
+            fontSize: "15px",
+            width: "160px",
+            height: "33px",
+          },
+        }}
+        onClick={handleCampaignDelete}
+      >
+        Delete Campaign
+      </Button>
+    </Box>
+
   }
 
   const textField = state.description;
@@ -77,7 +111,7 @@ const Campaign = () => {
                 margin: "10px 0 0 0 !important",
               }}
             >
-              Description entered in Set Up
+              {state.description}
             </Typography>
           </Box>
 
@@ -423,6 +457,7 @@ const Campaign = () => {
             </Box>
           </Box>
         </Container>
+        <ToastContainer />
       </Box>
     )
   }

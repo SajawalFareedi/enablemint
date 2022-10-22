@@ -1,52 +1,45 @@
-const express = require("express");
-const Router = express.Router();
+require("dotenv").config();
+
+const Router = require("express").Router();
 const bcrypt = require('bcrypt');
 var jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
 const nodemailer = require('nodemailer');
 var randtoken = require('rand-token');
-const mysqlConnection = require("../../config/DBConnection");
+const mysqlConnection = require("../../database/DBConnection");
+const validateCard = require('../../utils/cardValidator');
 
-dotenv.config();
 
-Router.get("/signIn", async (req, res) => {
-  mysqlConnection.query("SELECT * from usres", (err, rows, fields) => {
-    if (!err) {
-      res.send(rows);
-    }
-  });
-});
+// Router.get("/signIn", async (req, res) => {
+//   mysqlConnection.query("SELECT * from users", (err, rows, fields) => {
+//     if (!err) {
+//       res.send(rows);
+//     }
+//   });
+// });
 
 Router.post("/signIn", async (req, res) => {
   const data = req.body;
+  let getUser = `SELECT * FROM users WHERE email = "${data.email}"`;
 
-  let getUser;
-  getUser = `SELECT * FROM users WHERE email = "${data.email}"`;
-  
   mysqlConnection.query(getUser, async (err, rows, fields) => {
-    console.log("usersss", rows)
     let userInfo = Object.values(JSON.parse(JSON.stringify(rows)));
 
-    if(userInfo[0]?.userActive === 0) {
-      return res.status(401).json({ error: "Please signUp correctly" });
+    if (userInfo[0]?.userActive === 0) {
+      return res.status(401).json({ error: "Please signup correctly" });
     }
-    if (userInfo.length > 0 && userInfo[0]) {
 
-      const validPassword = await bcrypt.compareSync(
+    if (userInfo.length > 0 && userInfo[0]) {
+      const isValidPassword = bcrypt.compareSync(
         data.password,
         userInfo[0].password
       );
 
-      var response = bcrypt.compareSync(data.password, userInfo[0].password);
-
-      // const user = userInfo[0];
-      if (data.password === userInfo[0].password) {
-      // if (response) {
+      if (isValidPassword) {
         const token = jwt.sign(
           { user_id: userInfo[0].id, email: userInfo[0].email, type: data.type },
           process.env.TOKEN_SECRET,
           {
-            expiresIn: "2h",
+            expiresIn: process.env.LOGIN_EXPIRY,
           }
         );
 
@@ -58,32 +51,31 @@ Router.post("/signIn", async (req, res) => {
           id: userInfo[0].id,
           userType: data.type,
         });
+
       } else {
-        res.status(400).json({ error: "Invalid Password" });
+        res.status(400).json({ error: "Invalid email or password" });
       }
     } else {
-      res.status(401).json({ error: "User does not exist" });
+      res.status(401).json({ error: "Looks like you haven't signup yet" });
     }
   });
 });
 
-Router.get("/signUp", (req, res) => {
-  mysqlConnection.query("SELECT * from usres", (err, rows, fields) => {
-    if (!err) {
-      res.send(rows);
-    }
-  });
-});
+// Router.get("/signUp", (req, res) => {
+//   mysqlConnection.query("SELECT * from usres", (err, rows, fields) => {
+//     if (!err) {
+//       res.send(rows);
+//     }
+//   });
+// });
 
 Router.post("/signUpFlow1", (req, res) => {
   let requestData = req.body;
-
-  let emailpresent;
-  emailpresent = `SELECT * FROM users WHERE email = "${requestData.email}"`;
+  let emailpresent = `SELECT * FROM users WHERE email = "${requestData.email}"`;
 
   mysqlConnection.query(emailpresent, async (err, rows, fields) => {
     if (rows.length >= 1) {
-      return res.status(400).json({ data: rows, error: "Email already present" });
+      return res.status(400).json({ data: rows, error: "This email is already in use." });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -92,15 +84,15 @@ Router.post("/signUpFlow1", (req, res) => {
 
     const sql = `INSERT INTO users (email, password) VALUES ("${requestData.email}", "${requestData.password}")`;
 
-    await mysqlConnection.query(sql, (err, rows) => {
-
+    mysqlConnection.query(sql, (err, rows) => {
       const token = jwt.sign(
         { email: requestData.email },
         process.env.TOKEN_SECRET,
         {
-          expiresIn: "2h",
+          expiresIn: process.env.LOGIN_EXPIRY,
         }
       );
+
       if (!err) {
         return res.status(200).json({
           status: "success",
@@ -108,6 +100,7 @@ Router.post("/signUpFlow1", (req, res) => {
           email: requestData.email,
         });
       }
+
       res.send(err);
     });
   });
@@ -119,9 +112,9 @@ Router.post("/signUpFlow2", (req, res) => {
 
   mysqlConnection.query(emailpresent, async (err, rows, fields) => {
     if (rows.length < 1) {
-      return res.status(400).json({ error: "This Email isnot exist" });
+      return res.status(400).json({ error: "Please fill and send the email form first." });
     }
-    
+
     const sql = `UPDATE users SET 
       firstname = "${requestData.values.firstName}", 
       lastname = "${requestData.values.lastName}" ,
@@ -129,12 +122,13 @@ Router.post("/signUpFlow2", (req, res) => {
       jobTitle = "${requestData.values.jobTitle}"
     WHERE email = '${requestData.email}'`;
 
-    await mysqlConnection.query(sql, (err, rows) => {
+    mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         return res.status(200).json({
           status: "success",
         });
       }
+
       res.send(err);
     });
   });
@@ -146,12 +140,12 @@ Router.post("/signUpFlow3", (req, res) => {
 
   mysqlConnection.query(emailpresent, async (err, rows, fields) => {
     if (rows.length < 1) {
-      return res.status(400).json({ error: "This Email isnot exist" });
+      return res.status(400).json({ error: "Please fill and send the email form first." });
     }
-    
+
     const sql = `UPDATE users SET plan = "${requestData.selectedPlan}" WHERE email = '${requestData.email}'`;
 
-    await mysqlConnection.query(sql, (err, rows) => {
+    mysqlConnection.query(sql, (err, rows) => {
       if (!err) {
         return res.status(200).json({
           status: "success",
@@ -162,17 +156,35 @@ Router.post("/signUpFlow3", (req, res) => {
   });
 });
 
+const sendFreeTrialEmail = async (user) => {
+  try {
+    console.log(user)
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+const validateCardDetails = async (details) => {
+  const cardNumber = details.cardNumber.replace(/,/g, "")
+  return validateCard(cardNumber)
+}
+
 Router.post("/signUpFlow4", (req, res) => {
   let requestData = req.body;
-
-  console.log("requestsdatat", requestData)
   const emailpresent = `SELECT * FROM users WHERE email = "${requestData.email}"`;
 
   mysqlConnection.query(emailpresent, async (err, rows, fields) => {
     if (rows.length < 1) {
-      return res.status(400).json({ error: "This Email isnot exist" });
+      return res.status(400).json({ error: "Please fill and send the email form first." });
     }
-    
+
+    const isValidCard = await validateCardDetails(requestData.values);
+    if (!isValidCard) return res.status(400).json({ error: "The provided card details are incorrect" });
+
+    const customer = await Stripe.addNewCustomer(email)
+    req.session.customerID = customer;
+    req.session.email = email
+
     const sql = `UPDATE users SET 
       cardNumber = "${requestData.values.cardNumber}",
       cardDate = "${requestData.values.cardDate}",
@@ -182,8 +194,9 @@ Router.post("/signUpFlow4", (req, res) => {
       userActive = 1
     WHERE email = '${requestData.email}'`;
 
-    await mysqlConnection.query(sql, (err, rows) => {
+    mysqlConnection.query(sql, async (err, _rows) => {
       if (!err) {
+        await sendFreeTrialEmail(rows[0]);
         return res.status(200).json({
           status: "success",
         });
@@ -194,28 +207,25 @@ Router.post("/signUpFlow4", (req, res) => {
 });
 
 function sendEmail(email, token) {
-  console.log("sendmail tokenene", token)
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL,
-      pass: process.env.password,
+      user: process.env.GMAIL_EMAIL,
+      pass: process.env.GMAIL_PASSWORD,
     },
   });
 
-
   transporter.sendMail({
-    from: `From Enablimint`, // sender
+    from: process.env.GMAIL_EMAIL, // sender
     to: `${email}`, // list of receivers
-    subject: "Forgot Password for Enablimint", // Subject line
+    subject: "Forgot Password for Enablemint", // Subject line
     html: `
     <div>
-      <b>You have got forgot password from Enablimint</b>
       <div style='display: flex; justify-content: center;'>
         <p>You requested for reset password, kindly use this 
           <a 
             style='text-decoration: none; background-color: green; padding: 5px 20px; margin: 0 10px; border-radius: 5px; color: white;'
-            href="http://localhost:3000/reset-password/${token}"
+            href="${process.env.BACKEND_API_HOST}/reset-password/${token}"
           >
             link
           </a> 
@@ -224,17 +234,16 @@ function sendEmail(email, token) {
       </div>
     </div>`, // html body
   }).then(info => {
-    if(info) {
-      return info.status(200).json({status: "success"});
+    if (info) {
+      return info.status(200).json({ status: "success" });
     }
   }).catch(console.error);
 }
 
 Router.post("/reset-password-email", (req, res) => {
   const { email } = req.body;
+  let currentUser = `SELECT * FROM users WHERE email = "${email}"`;
 
-  let currentUser;
-  currentUser = `SELECT * FROM users WHERE email = "${email}"`;
   mysqlConnection.query(currentUser, async (err, rows, fields) => {
     if (err) throw err;
     if (rows[0]?.email.length > 0) {
@@ -245,24 +254,24 @@ Router.post("/reset-password-email", (req, res) => {
         var data = {
           token: token
         }
-        mysqlConnection.query('UPDATE users SET ? WHERE email ="' + rows[0].email + '"', data, function(err, result) {
-          if(err) throw err
+        mysqlConnection.query('UPDATE users SET ? WHERE email ="' + rows[0].email + '"', data, function (err, result) {
+          if (err) throw err
           return res.status(200).json({ message: 'success' });
         })
       } else {
-        return res.status(401).json({ error: 'Something goes to wrong. Please try again' });
+        return res.status(500).json({ error: 'Something went to wrong. Please try again.' });
       }
     } else {
-      console.log('2');
-      return res.status(401).json({ error: 'The Email is not registered with us' });
+      return res.status(401).json({ error: 'This Email is not registered.' });
     }
   });
 });
 
-Router.post('/update-password', function(req, res, next) {
+Router.post('/update-password', function (req, res, next) {
   var token = req.body.token;
   var password = req.body.password;
-  mysqlConnection.query('SELECT * FROM users WHERE token ="' + token + '"', function(err, result) {
+
+  mysqlConnection.query('SELECT * FROM users WHERE token ="' + token + '"', function (err, result) {
     if (err) throw err;
     if (result.length > 0) {
       // var saltRounds = 10;
@@ -275,14 +284,14 @@ Router.post('/update-password', function(req, res, next) {
       var data = {
         password: password
       }
-      mysqlConnection.query('UPDATE users SET ? WHERE email ="' + result[0].email + '"', data, function(err, result) {
-        if(err) throw err
-        else {
-          res.status(200).json({ message: 'success' });
-        }
+      mysqlConnection.query('UPDATE users SET ? WHERE email ="' + result[0].email + '"', data, function (err, result) {
+        if (err) throw err;
+
+        res.status(200).json({ message: 'success' });
+
       });
     } else {
-      return res.status(401).json({ error: 'Invalid link; please try again' });
+      return res.status(401).json({ error: 'This link is not valid. Please try again.' });
     }
   });
 })
