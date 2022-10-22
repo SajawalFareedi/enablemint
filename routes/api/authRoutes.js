@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 var randtoken = require('rand-token');
 const mysqlConnection = require("../../database/DBConnection");
 const validateCard = require('../../utils/cardValidator');
+const {addNewCustomer, subscribeCustomerToPlan, createPaymentMethod, attachPaymentMethodToCustomer} = require("../../utils/paymentHandler");
 
 
 // Router.get("/signIn", async (req, res) => {
@@ -181,9 +182,13 @@ Router.post("/signUpFlow4", (req, res) => {
     const isValidCard = await validateCardDetails(requestData.values);
     if (!isValidCard) return res.status(400).json({ error: "The provided card details are incorrect" });
 
-    const customer = await Stripe.addNewCustomer(email)
+    const customer = await addNewCustomer(requestData.email)
+
+    const paymentMethod = await createPaymentMethod(requestData.values)
+    await attachPaymentMethodToCustomer(paymentMethod.id, customer.id)
+    await subscribeCustomerToPlan(customer.id)
     req.session.customerID = customer;
-    req.session.email = email
+    req.session.email = requestData.email
 
     const sql = `UPDATE users SET 
       cardNumber = "${requestData.values.cardNumber}",

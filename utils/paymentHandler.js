@@ -39,8 +39,55 @@ const createCheckoutSession = async (customer, price) => {
     return session
 }
 
+async function attachCardToCustomer(cardToken, customerId) {
+    return await Stripe.customers.createSource(customerId, {source: cardToken})
+}
+
+async function createPaymentMethod(data) {
+    const splitDate = data.cardDate.split('/')
+    return await Stripe.paymentMethods.create({
+      type: 'card',
+      card: {
+        number: data.cardNumber,
+        exp_month: splitDate[0],
+        exp_year: splitDate[1],
+        cvc: data.cvc,
+      },
+    });
+}
+
+async function attachPaymentMethodToCustomer(paymentMethodId, customerId, setAsDefault=true) {
+
+    const paymentMethod = await Stripe.paymentMethods.attach(
+      paymentMethodId,
+      {customer: customerId}
+    );
+
+    if (setAsDefault) {
+        await updateCustomer(customerId, {invoice_settings: {default_payment_method: paymentMethodId}})
+    }
+    return paymentMethod
+}
+
+async function updateCustomer(customerId, data) {
+    return await Stripe.customers.update(customerId, data);
+}
+
+async function subscribeCustomerToPlan(customerId, priceId='price_1LubUOGsrQPkkKAHcw8u109Y') {
+    return await Stripe.subscriptions.create({
+        customer: customerId,
+        items: [
+            {price: priceId},
+        ]
+    })
+}
+
 module.exports = {
     addNewCustomer,
     getCustomerByID,
-    createCheckoutSession
+    createCheckoutSession,
+    attachCardToCustomer,
+    createPaymentMethod,
+    attachPaymentMethodToCustomer,
+    subscribeCustomerToPlan
 };
