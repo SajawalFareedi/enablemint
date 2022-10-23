@@ -6,7 +6,7 @@ import { Navbar, Footer, FAQs } from "../components";
 import "../assets/styles/Pricing.css";
 import GetStarted from "./Pricing/GetStarted";
 import Questions from "./Pricing/Questions";
-
+import LookupPricingCard from './Pricing/LookupPricingCard'
 
 const mapStateToProps = (state) => ({ state });
 
@@ -108,6 +108,67 @@ export default connect(
 
                     <GetStarted updateData={updateData} />
 
+                    <Box sx={{marginTop: '47px'}}>
+                        <Typography variant="h4" sx={{
+                            fontWeight: 600,
+                            textAlign: 'center',
+                            fontSize: '36px',
+                            ['@media (max-width: 600px)']: { // eslint-disable-line no-useless-computed-key
+                                textAlign: 'center',
+                                marginBottom: '10px',
+                            }
+                        }}>
+                            Grow even faster with optional add-ons
+                        </Typography>
+
+                        <Box sx={{
+                            background: '#388E3C',
+                            borderRadius: '20px',
+                            paddingTop: '38px',
+                            marginTop: '50px',
+                            paddingBottom: '50px'
+                        }}>
+                            <Typography variant="h5" sx={{
+                        maxWidth: '60%',
+                        textAlign: "center",
+                        margin: "auto",
+
+                        fontWeight: 700,
+                        fontSize: '26px',
+                        lineHeight: '30px',
+                        textDecorationLine: 'underline',
+                        color: '#FFFFFF',
+                        ['@media (max-width:550px)']: { // eslint-disable-line no-useless-computed-key
+                            maxWidth: '100%',
+                        },
+                    }}>
+                        Contact Email & Phone Lookups
+                    </Typography>
+                            <Typography variant="h6" sx={{
+                        maxWidth: '60%',
+                        textAlign: "center",
+                        margin: "auto",
+                        fontWeight: 500,
+                        fontSize: '18px',
+                        lineHeight: '27px',
+                        color: '#FFFFFF',
+                        marginTop: '23px',
+
+                        ['@media (max-width:550px)']: { // eslint-disable-line no-useless-computed-key
+                            maxWidth: '100%',
+                        },
+                    }}>
+                        Grow your pipeline with Email & Direct Phone Number Contact Lookups for your high-value prospects
+                    </Typography>
+
+                            <Box display="flex" justifyContent='space-around' sx={{marginTop: '50px'}}>
+                                <LookupPricingCard amount='500' price='350'/>
+                                <LookupPricingCard amount='1000' price='600'/>
+                                <LookupPricingCard amount='2000' price='1000'/>
+                            </Box>
+                        </Box>
+                    </Box>
+
                     <Box sx={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -153,6 +214,7 @@ export default connect(
                     </Box>
                 </Container>
             </Box>
+
             <Questions />
             <Footer />
         </Box>
