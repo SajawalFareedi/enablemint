@@ -126,3 +126,6 @@ dist
 
 # temporary files & dirs
 tmp/
+
+# PyCharm
+.idea
