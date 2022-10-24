@@ -33,19 +33,11 @@ const UploadFileApp = () => {
 
   return (
     <Box sx={{
-      backgroundImage: `url(/assets/Header_Bg.png)`,
-      backgroundSize: "100% 100%",
-      backgroundRepeat: "no-repeat",
-      paddingBottom: "70px !important",
+      background: 'white',
+      marginBottom: '60px'
     }}>
-      <Container sx={{
-        padding: "0 60px !important",
-        ['@media (max-width:684px)']: { // eslint-disable-line no-useless-computed-key 
-          padding: "0px 20px !important",
-        }
-      }}>
         <Box sx={{
-          padding: "130px 0px 60px 0px !important",
+          padding: "0px 0px 60px 0px !important",
           display: "flex",
           justifyContent: "space-between",
           ['@media (max-width:576px)']: { // eslint-disable-line no-useless-computed-key 
@@ -190,9 +182,8 @@ const UploadFileApp = () => {
             </TableBody>
           </Table>
         </TableContainer>
-      </Container>
-      <WebsiteModal websiteModal={websiteModal} setWebsiteModal={setWebsiteModal} workFlowWebsites={workFlowWebsites} setWorkFlowWebsites={setWorkFlowWebsites} />
-      <LinkedInModal linkedInModal={linkedInModal} setLinkedInModal={setLinkedInModal} workFlowWebsites={workFlowWebsites} setWorkFlowWebsites={setWorkFlowWebsites} />
+      <WebsiteModal websiteModal={websiteModal} setWebsiteModal={setWebsiteModal} workFlowWebsites={workFlowWebsites} setWorkFlowWebsites={setWorkFlowWebsites}/>
+      <LinkedInModal linkedInModal={linkedInModal} setLinkedInModal={setLinkedInModal} workFlowWebsites={workFlowWebsites} setWorkFlowWebsites={setWorkFlowWebsites}/>
     </Box>
   )
 }
