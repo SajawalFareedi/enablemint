@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Container, Box, Typography, Button, } from '@mui/material';
 import Slider from "../../components/Slider";
+import UploadFile from "../UploadFile";
 
 const workFlowFiles = [
   { text: "Company_Website_LinkedIns.xlsx" },
@@ -81,6 +82,8 @@ const Campaign = () => {
             </Typography>
           </Box>
 
+          <UploadFile/>
+
           <Box sx={{
             display: "flex",
             flexDirection: "column",
@@ -147,7 +150,7 @@ const Campaign = () => {
                 <Box key={i} sx={{
                   display: "flex",
                   justifyContent: "space-between",
-                  alignIterms: "center",
+                  alignItems: "center",
                   width: "100%",
                   padding: "10px 48px !important",
                   background: "white",
@@ -215,7 +218,7 @@ const Campaign = () => {
                 margin: { md: "10px 45px 0 45px !important", sm: "10px 25px 0 25px !important" },
               }}
             >
-              Use this tool to clean your exported Contact Lists by filtering characteristics of interest (e.g. Job Titles, Senority, Location)
+              Use this tool to clean your exported Contact Lists by filtering characteristics of interest (e.g. Job Titles, Seniority, Location)
             </Typography>
             <Box sx={{
               background: "#F9F8FE",
@@ -277,7 +280,7 @@ const Campaign = () => {
                 <Box key={i} sx={{
                   display: "flex",
                   justifyContent: "space-between",
-                  alignIterms: "center",
+                  alignItems: "center",
                   width: "100%",
                   padding: "10px 48px !important",
                   background: "white",
@@ -393,7 +396,7 @@ const Campaign = () => {
                 <Box key={i} sx={{
                   display: "flex",
                   justifyContent: "space-between",
-                  alignIterms: "center",
+                  alignItems: "center",
                   width: "100%",
                   padding: "10px 48px !important",
                   background: "white",
