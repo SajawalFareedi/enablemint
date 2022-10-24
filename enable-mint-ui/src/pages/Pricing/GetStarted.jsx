@@ -34,6 +34,14 @@ const Accelerator = [
   { text: "Collaboration (Soon)" },
 ]
 
+const plansIDs = {
+  'monthly': {
+    'starter': 'price_1LubUOGsrQPkkKAHcw8u109Y',
+    'growth': 'price_1LubZ8GsrQPkkKAHxZb7YhCL',
+    'accelerator': 'price_1LubZdGsrQPkkKAHXCOYtg9G'
+  }
+}
+
 const GetStarted = ({ updateData }) => {
   const navigate = useNavigate();
   const [monthly, setMonthly] = useState(true);

@@ -56,20 +56,20 @@ export default connect(
         validationSchema: validationSchema,
         onSubmit: (values) => {
             formik.isSubmitting = true;
-            updateData({ firstName: values.firstName, lastName: values.lastName, companyName: values.companyName, jobTitle: values.jobTitle });
+            // updateData({ firstName: values.firstName, lastName: values.lastName, companyName: values.companyName, jobTitle: values.jobTitle });
             const formData = {
                 email: state,
                 values
             }
             signUpFlow2(formData)
-            .then((res)=>{
-                if(res.status === "success") {
-                    navigate(`/signup?${createSearchParams({ f: "3" })}`, { state: state})
-                }
-                else {
-                    toast.error(res.error);
-                }
-            })
+                .then((res) => {
+                    if (res.status === "success") {
+                        navigate(`/signup?${createSearchParams({ f: "3" })}`, { state: state })
+                    }
+                    else {
+                        toast.error(res.error);
+                    }
+                })
         },
     });
 
@@ -94,17 +94,17 @@ export default connect(
                 },
             }}>
                 <Typography
-                variant="h6"
-                component="div"
-                sx={{ 
-                    color: 'white', 
-                    fontSize: "20px",
-                    lineHeight: "24px",
-                    cursor: "pointer",
-                }}
-                onClick={()=>navigate("/")}
+                    variant="h6"
+                    component="div"
+                    sx={{
+                        color: 'white',
+                        fontSize: "20px",
+                        lineHeight: "24px",
+                        cursor: "pointer",
+                    }}
+                    onClick={() => navigate("/")}
                 >
-                    <img src="/assets/logo-1@2x.png" alt='logo' style={{ width: "50px", marginRight: "5px",}} />
+                    <img src="/assets/logo-1@2x.png" alt='logo' style={{ width: "50px", marginRight: "5px", }} />
                     enablemint
                 </Typography>
 
@@ -112,7 +112,7 @@ export default connect(
                     width: "70%", margin: "120px 0 0 50px !important",
                     ['@media (max-width:500px)']: { // eslint-disable-line no-useless-computed-key
                         width: "100%", margin: "20px 0 0 0px !important",
-                    },  
+                    },
                 }}>
                     <form onSubmit={formik.handleSubmit}>
                         <Typography
@@ -130,8 +130,8 @@ export default connect(
                             Create your account
                         </Typography>
 
-                        <Box sx={{display: "flex", justifyContent: "space-between"}}>
-                            <Box sx={{display: "flex", flexDirection: 'column', justifyContent: "space-between"}}>
+                        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                            <Box sx={{ display: "flex", flexDirection: 'column', justifyContent: "space-between" }}>
                                 <Typography
                                     sx={{
                                         fontFamily: 'Inter',
@@ -167,7 +167,7 @@ export default connect(
                                     }}
                                 />
                             </Box>
-                            <Box sx={{display: "flex", flexDirection: 'column', justifyContent: "space-between", marginLeft: "10px"}}>
+                            <Box sx={{ display: "flex", flexDirection: 'column', justifyContent: "space-between", marginLeft: "10px" }}>
                                 <Typography
                                     sx={{
                                         fontFamily: 'Inter',
@@ -204,7 +204,7 @@ export default connect(
                                 />
                             </Box>
                         </Box>
-                        <Box sx={{display: "flex", flexDirection: 'column', justifyContent: "space-between", marginTop: '16px'}}>
+                        <Box sx={{ display: "flex", flexDirection: 'column', justifyContent: "space-between", marginTop: '16px' }}>
                             <Typography
                                 sx={{
                                     fontFamily: 'Inter',
@@ -240,7 +240,7 @@ export default connect(
                                 }}
                             />
                         </Box>
-                        <Box sx={{display: "flex", flexDirection: 'column', justifyContent: "space-between", marginTop: '16px'}}>
+                        <Box sx={{ display: "flex", flexDirection: 'column', justifyContent: "space-between", marginTop: '16px' }}>
                             <Typography
                                 sx={{
                                     fontFamily: 'Inter',
@@ -278,7 +278,7 @@ export default connect(
                         </Box>
 
                         <Box display="flex" justifyContent="center">
-                            <Button type="submit" 
+                            <Button type="submit"
                                 sx={{
                                     marginTop: "20px",
                                     width: "100%",
@@ -301,8 +301,8 @@ export default connect(
                                 Sign Up
                             </Button>
                         </Box>
-                        
-                        <Typography 
+
+                        <Typography
                             sx={{
                                 fontFamily: 'Inter',
                                 fontStyle: "normal",
@@ -316,7 +316,7 @@ export default connect(
                                 marginTop: '70px',
                                 cursor: "pointer",
                             }}
-                            onClick={()=>navigate(-1)}
+                            onClick={() => navigate(-1)}
                         >
                             Back
                         </Typography>
@@ -324,7 +324,7 @@ export default connect(
                 </Box>
 
             </Grid>
-            <Grid item md={6} xs={12}  sx={{
+            <Grid item md={6} xs={12} sx={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -332,7 +332,7 @@ export default connect(
                     margin: "20px 0"
                 },
             }}>
-                <img style={{width: '55%'}} src="/assets/users/Asset 1 8.png" />
+                <img style={{ width: '55%' }} src="/assets/users/Asset 1 8.png" />
             </Grid>
             <ToastContainer />
         </Grid>

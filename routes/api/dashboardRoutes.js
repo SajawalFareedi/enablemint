@@ -1,9 +1,8 @@
+require("dotenv").config();
 const express = require("express");
 const Router = express.Router();
-const dotenv = require("dotenv");
-const mysqlConnection = require("../../config/DBConnection");
+const mysqlConnection = require("../../database/DBConnection");
 
-dotenv.config();
 
 Router.get("/getCampaigns/:id", async (req, res) => {
   const email = req.params.id;
@@ -29,7 +28,11 @@ Router.post("/newCampaign", (req, res) => {
           data: rows,
         });
       }
-      res.send(err);
+
+      res.status(500).json({
+        error: "There was an error in saving this new campaign. Please try again."
+      });
+      
     });
   });
 });
